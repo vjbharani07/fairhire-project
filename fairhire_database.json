@@ -1,0 +1,559 @@
+﻿{
+    "jobs":  [
+                 {
+                     "id":  "job-1",
+                     "title":  "Software Developer",
+                     "company":  "Zoho",
+                     "description":  "Looking for entry-level developers proficient in core Java, Object-Oriented design, and relational databases. Candidates work on high-volume cloud applications.",
+                     "minScore":  38,
+                     "location":  "Chennai, Tamil Nadu",
+                     "salary":  "₹5.5 - 7.5 LPA",
+                     "experience":  "Fresher / 0-1 Yr",
+                     "requiredSkills":  [
+                                            "Java",
+                                            "SQL",
+                                            "Data Structures",
+                                            "Git"
+                                        ],
+                     "openings":  12,
+                     "type":  "Full-Time"
+                 },
+                 {
+                     "id":  "job-2",
+                     "title":  "Systems Engineer",
+                     "company":  "Infosys",
+                     "description":  "Enterprise software engineering role focusing on Java, microservices, and database tuning. Ideal for graduates with strong fundamentals.",
+                     "minScore":  35,
+                     "location":  "Bangalore / Mysore",
+                     "salary":  "₹4.5 - 6.0 LPA",
+                     "experience":  "Fresher / 2026 Batch",
+                     "requiredSkills":  [
+                                            "Java",
+                                            "SQL",
+                                            "Python"
+                                        ],
+                     "openings":  25,
+                     "type":  "Full-Time"
+                 },
+                 {
+                     "id":  "job-3",
+                     "title":  "Software Engineer (Distributed Systems)",
+                     "company":  "Google",
+                     "description":  "Design and scale large-scale distributed systems, compute backends, and storage clusters. Requires advanced algorithms and system design.",
+                     "minScore":  46,
+                     "location":  "Hyderabad / Bangalore",
+                     "salary":  "₹18 - 25 LPA",
+                     "experience":  "Fresher / High Caliber",
+                     "requiredSkills":  [
+                                            "Data Structures",
+                                            "Algorithms",
+                                            "C++",
+                                            "Distributed Systems"
+                                        ],
+                     "openings":  3,
+                     "type":  "Full-Time"
+                 },
+                 {
+                     "id":  "job-4",
+                     "title":  "Associate Cloud Engineer",
+                     "company":  "AWS",
+                     "description":  "Entry-level cloud infrastructure and automation role. Focus on cloud deployment patterns, network configurations, and infrastructure-as-code.",
+                     "minScore":  40,
+                     "location":  "Hyderabad, Telangana",
+                     "salary":  "₹8.0 - 12 LPA",
+                     "experience":  "Fresher / 0-1 Yr",
+                     "requiredSkills":  [
+                                            "Cloud",
+                                            "Python",
+                                            "Linux",
+                                            "Git"
+                                        ],
+                     "openings":  8,
+                     "type":  "Full-Time"
+                 },
+                 {
+                     "id":  "job-5",
+                     "title":  "Java Developer",
+                     "company":  "ABC Technologies",
+                     "description":  "Build robust enterprise backends using Spring Boot, JPA, and PostgreSQL. Candidates participate in agile sprint delivery.",
+                     "minScore":  36,
+                     "location":  "Chennai / Remote",
+                     "salary":  "₹5.0 - 6.5 LPA",
+                     "experience":  "Fresher / 0-1 Yr",
+                     "requiredSkills":  [
+                                            "Java",
+                                            "Spring Boot",
+                                            "SQL"
+                                        ],
+                     "openings":  10,
+                     "type":  "Full-Time"
+                 }
+             ],
+    "candidates":  [
+                       {
+                           "id":  "FH1001",
+                           "name":  "Ragav V",
+                           "email":  "ragav.v@student.edu",
+                           "phone":  "+91 98765 43210",
+                           "location":  "Chennai, India",
+                           "profileCompletion":  85,
+                           "assessmentStatus":  "Completed",
+                           "latestAssessment":  {
+                                                    "score":  14,
+                                                    "totalQuestions":  15,
+                                                    "percentage":  93,
+                                                    "submittedAt":  "Recent"
+                                                },
+                           "academic":  {
+                                            "tenthPercent":  79,
+                                            "twelfthPercent":  72,
+                                            "cgpa":  8.5
+                                        },
+                           "skills":  [
+                                          {
+                                              "name":  "Java",
+                                              "level":  "Advanced"
+                                          },
+                                          {
+                                              "name":  "Python",
+                                              "level":  "Advanced"
+                                          },
+                                          {
+                                              "name":  "SQL",
+                                              "level":  "Advanced"
+                                          },
+                                          {
+                                              "name":  "Git",
+                                              "level":  "Intermediate"
+                                          },
+                                          {
+                                              "name":  "Data Structures",
+                                              "level":  "Intermediate"
+                                          },
+                                          {
+                                              "name":  "Spring Boot",
+                                              "level":  "Intermediate"
+                                          }
+                                      ],
+                           "certifications":  [
+                                                  {
+                                                      "id":  "c1",
+                                                      "title":  "NPTEL Python",
+                                                      "issuer":  "IIT Madras",
+                                                      "year":  "2024"
+                                                  },
+                                                  {
+                                                      "id":  "c3",
+                                                      "title":  "MySQL Developer",
+                                                      "issuer":  "Oracle Academy",
+                                                      "year":  "2025"
+                                                  },
+                                                  {
+                                                      "id":  "c4",
+                                                      "title":  "Cloud Fundamentals",
+                                                      "issuer":  "AWS Educate",
+                                                      "year":  "2025"
+                                                  }
+                                              ],
+                           "projects":  [
+                                            {
+                                                "id":  "p1",
+                                                "title":  "GestureHeal AI",
+                                                "description":  "AI-assisted emergency healthcare communication platform using real-time gesture recognition.",
+                                                "technologies":  [
+                                                                     "FastAPI",
+                                                                     "React",
+                                                                     "MediaPipe",
+                                                                     "OpenCV"
+                                                                 ],
+                                                "githubUrl":  "https://github.com/ragav/gestureheal-ai"
+                                            }
+                                        ],
+                           "experience":  {
+                                              "hasInternship":  true,
+                                              "role":  "Software Development Intern",
+                                              "company":  "NextGen Tech Labs",
+                                              "duration":  "2 Months (Summer 2025)"
+                                          },
+                           "score":  {
+                                         "total":  42,
+                                         "max":  50,
+                                         "academic":  24,
+                                         "technical":  12,
+                                         "certifications":  2,
+                                         "projects":  4
+                                     }
+                       },
+                       {
+                           "id":  "FH2002",
+                           "name":  "Priya Sharma",
+                           "email":  "priya.s@student.edu",
+                           "phone":  "+91 91234 56789",
+                           "location":  "Bangalore, India",
+                           "profileCompletion":  70,
+                           "assessmentStatus":  "Not Completed",
+                           "latestAssessment":  null,
+                           "academic":  {
+                                            "tenthPercent":  84,
+                                            "twelfthPercent":  80,
+                                            "cgpa":  8.8
+                                        },
+                           "skills":  [
+                                          {
+                                              "name":  "Python",
+                                              "level":  "Advanced"
+                                          },
+                                          {
+                                              "name":  "SQL",
+                                              "level":  "Intermediate"
+                                          },
+                                          {
+                                              "name":  "Tableau",
+                                              "level":  "Intermediate"
+                                          }
+                                      ],
+                           "certifications":  [
+                                                  {
+                                                      "id":  "c21",
+                                                      "title":  "Data Analytics Professional",
+                                                      "issuer":  "Google",
+                                                      "year":  "2025"
+                                                  }
+                                              ],
+                           "projects":  [
+                                            {
+                                                "id":  "p21",
+                                                "title":  "Customer Churn Prediction Engine",
+                                                "description":  "Machine learning prediction pipeline identifying high-risk churn customers.",
+                                                "technologies":  [
+                                                                     "Python",
+                                                                     "Scikit-Learn",
+                                                                     "FastAPI"
+                                                                 ],
+                                                "githubUrl":  "https://github.com/priyasharma/churn-predictor"
+                                            }
+                                        ],
+                           "experience":  {
+                                              "hasInternship":  true,
+                                              "role":  "Data Analyst Intern",
+                                              "company":  "Analytics Pulse",
+                                              "duration":  "3 Months (2025)"
+                                          },
+                           "score":  {
+                                         "total":  39,
+                                         "max":  50,
+                                         "academic":  26,
+                                         "technical":  9,
+                                         "certifications":  1,
+                                         "projects":  3
+                                     }
+                       }
+                   ],
+    "applications":  [
+                         {
+                             "generalScore":  14,
+                             "candidateEmail":  "test@college.edu",
+                             "candidateName":  "Test Candidate",
+                             "jobId":  "job-2",
+                             "jobTitle":  "Python Developer",
+                             "caseScore":  5,
+                             "company":  "Tech Company",
+                             "score":  46,
+                             "status":  "APPLIED",
+                             "candidateId":  "FH-TEST-999",
+                             "id":  "app-1790434790134",
+                             "appliedDate":  "2026-09-26"
+                         },
+                         {
+                             "id":  "app-101",
+                             "jobId":  "job-1",
+                             "jobTitle":  "Software Developer",
+                             "company":  "Zoho",
+                             "candidateId":  "FH1001",
+                             "candidateName":  "Ragav V",
+                             "candidateEmail":  "ragav.v@student.edu",
+                             "appliedDate":  "2026-09-15",
+                             "status":  "SELECTED",
+                             "score":  42,
+                             "generalScore":  14,
+                             "generalTotal":  15,
+                             "generalPercentage":  93,
+                             "caseScore":  5,
+                             "caseTotal":  6,
+                             "casePercentage":  83,
+                             "candidateProfile":  {
+                                                      "name":  "Ragav V",
+                                                      "email":  "ragav.v@student.edu",
+                                                      "education":  "B.Tech Computer Science \u0026 Engineering (CGPA: 8.5)",
+                                                      "tenth":  79,
+                                                      "twelfth":  72,
+                                                      "cgpa":  8.5,
+                                                      "academicScore":  "24 / 30",
+                                                      "technicalScore":  "12 / 15",
+                                                      "certificationsScore":  "2 / 5",
+                                                      "projectsScore":  "4 / 5",
+                                                      "skills":  [
+                                                                     "Java (Advanced)",
+                                                                     "Python (Advanced)",
+                                                                     "SQL (Advanced)",
+                                                                     "Spring Boot (Intermediate)"
+                                                                 ],
+                                                      "certifications":  [
+                                                                             {
+                                                                                 "title":  "NPTEL Python",
+                                                                                 "issuer":  "IIT Madras",
+                                                                                 "year":  "2024"
+                                                                             },
+                                                                             {
+                                                                                 "title":  "MySQL Developer",
+                                                                                 "issuer":  "Oracle Academy",
+                                                                                 "year":  "2025"
+                                                                             }
+                                                                         ],
+                                                      "projects":  [
+                                                                       {
+                                                                           "title":  "GestureHeal AI",
+                                                                           "description":  "Healthcare gesture communication",
+                                                                           "technologies":  [
+                                                                                                "FastAPI",
+                                                                                                "React",
+                                                                                                "OpenCV"
+                                                                                            ]
+                                                                       }
+                                                                   ],
+                                                      "experience":  "Software Development Intern at NextGen Tech Labs"
+                                                  },
+                             "interviewRequest":  null,
+                             "hrFeedback":  "Candidate demonstrated exceptional performance in technical assessment."
+                         },
+                         {
+                             "id":  "app-102",
+                             "jobId":  "job-2",
+                             "jobTitle":  "Systems Engineer",
+                             "company":  "Infosys",
+                             "candidateId":  "FH1002",
+                             "candidateName":  "Ananya Sen",
+                             "candidateEmail":  "ananya.sen@college.edu",
+                             "appliedDate":  "2026-09-14",
+                             "status":  "INTERVIEW_REQUESTED",
+                             "score":  44,
+                             "generalScore":  13,
+                             "generalTotal":  15,
+                             "generalPercentage":  87,
+                             "caseScore":  5,
+                             "caseTotal":  6,
+                             "casePercentage":  83,
+                             "candidateProfile":  {
+                                                      "name":  "Ananya Sen",
+                                                      "email":  "ananya.sen@college.edu",
+                                                      "education":  "B.Tech Information Technology (CGPA: 8.9)",
+                                                      "tenth":  88,
+                                                      "twelfth":  85,
+                                                      "cgpa":  8.9,
+                                                      "academicScore":  "27 / 30",
+                                                      "technicalScore":  "11 / 15",
+                                                      "certificationsScore":  "2 / 5",
+                                                      "projectsScore":  "4 / 5",
+                                                      "skills":  [
+                                                                     "Java",
+                                                                     "SQL",
+                                                                     "Cloud",
+                                                                     "Distributed Systems"
+                                                                 ],
+                                                      "certifications":  [
+                                                                             {
+                                                                                 "title":  "AWS Certified Cloud Practitioner",
+                                                                                 "issuer":  "Amazon Web Services",
+                                                                                 "year":  "2025"
+                                                                             }
+                                                                         ],
+                                                      "projects":  [
+                                                                       {
+                                                                           "title":  "Distributed Task Scheduler",
+                                                                           "description":  "Fault-tolerant Redis worker cluster",
+                                                                           "technologies":  [
+                                                                                                "Java",
+                                                                                                "Redis",
+                                                                                                "Docker"
+                                                                                            ]
+                                                                       }
+                                                                   ],
+                                                      "experience":  "Cloud Engineering Intern at InfoSys Labs"
+                                                  },
+                             "interviewRequest":  {
+                                                      "type":  "Technical Interview",
+                                                      "date":  "2026-10-02",
+                                                      "time":  "11:00 AM",
+                                                      "message":  "Technical discussion focusing on distributed batch scheduling and microservices architecture."
+                                                  },
+                             "hrFeedback":  "Interview requested based on exceptional case assessment score."
+                         },
+                         {
+                             "id":  "app-103",
+                             "jobId":  "job-5",
+                             "jobTitle":  "Java Developer",
+                             "company":  "ABC Technologies",
+                             "candidateId":  "FH1003",
+                             "candidateName":  "Vikram Patel",
+                             "candidateEmail":  "vikram.p@college.edu",
+                             "appliedDate":  "2026-09-12",
+                             "status":  "SELECTED",
+                             "score":  45,
+                             "generalScore":  14,
+                             "generalTotal":  15,
+                             "generalPercentage":  93,
+                             "caseScore":  6,
+                             "caseTotal":  6,
+                             "casePercentage":  100,
+                             "candidateProfile":  {
+                                                      "name":  "Vikram Patel",
+                                                      "email":  "vikram.p@college.edu",
+                                                      "education":  "B.Tech Computer Engineering (CGPA: 9.1)",
+                                                      "tenth":  90,
+                                                      "twelfth":  88,
+                                                      "cgpa":  9.1,
+                                                      "academicScore":  "28 / 30",
+                                                      "technicalScore":  "12 / 15",
+                                                      "certificationsScore":  "1 / 5",
+                                                      "projectsScore":  "4 / 5",
+                                                      "skills":  [
+                                                                     "Java",
+                                                                     "Spring Boot",
+                                                                     "Microservices",
+                                                                     "PostgreSQL"
+                                                                 ],
+                                                      "certifications":  [
+                                                                             {
+                                                                                 "title":  "Oracle Certified Professional Java SE 11",
+                                                                                 "issuer":  "Oracle",
+                                                                                 "year":  "2024"
+                                                                             }
+                                                                         ],
+                                                      "projects":  [
+                                                                       {
+                                                                           "title":  "E-Commerce Microservices Engine",
+                                                                           "description":  "High-throughput checkout pipeline",
+                                                                           "technologies":  [
+                                                                                                "Spring Boot",
+                                                                                                "Kafka",
+                                                                                                "PostgreSQL"
+                                                                                            ]
+                                                                       }
+                                                                   ],
+                                                      "experience":  "Backend Development Intern at ABC Labs"
+                                                  },
+                             "interviewRequest":  {
+                                                      "type":  "Technical Interview",
+                                                      "date":  "2026-09-18",
+                                                      "time":  "02:30 PM",
+                                                      "message":  "Completed technical interview with flying colors."
+                                                  },
+                             "hrFeedback":  "Offer extended: Candidate demonstrated mastery in microservices architecture and clean code principles."
+                         },
+                         {
+                             "id":  "app-104",
+                             "jobId":  "job-1",
+                             "jobTitle":  "Software Developer",
+                             "company":  "Zoho",
+                             "candidateId":  "FH1004",
+                             "candidateName":  "Deepak Kumar",
+                             "candidateEmail":  "deepak.k@college.edu",
+                             "appliedDate":  "2026-09-10",
+                             "status":  "REJECTED",
+                             "score":  32,
+                             "generalScore":  8,
+                             "generalTotal":  15,
+                             "generalPercentage":  53,
+                             "caseScore":  2,
+                             "caseTotal":  6,
+                             "casePercentage":  33,
+                             "candidateProfile":  {
+                                                      "name":  "Deepak Kumar",
+                                                      "email":  "deepak.k@college.edu",
+                                                      "education":  "B.Sc Computer Science (CGPA: 7.2)",
+                                                      "tenth":  68,
+                                                      "twelfth":  64,
+                                                      "cgpa":  7.2,
+                                                      "academicScore":  "20 / 30",
+                                                      "technicalScore":  "8 / 15",
+                                                      "certificationsScore":  "0 / 5",
+                                                      "projectsScore":  "4 / 5",
+                                                      "skills":  [
+                                                                     "HTML",
+                                                                     "CSS",
+                                                                     "C Basics"
+                                                                 ],
+                                                      "certifications":  [
+
+                                                                         ],
+                                                      "projects":  [
+                                                                       {
+                                                                           "title":  "Portfolio Webpage",
+                                                                           "description":  "Static HTML/CSS website",
+                                                                           "technologies":  [
+                                                                                                "HTML",
+                                                                                                "CSS"
+                                                                                            ]
+                                                                       }
+                                                                   ],
+                                                      "experience":  "Fresher"
+                                                  },
+                             "interviewRequest":  null,
+                             "hrFeedback":  "Candidate did not meet minimum technical benchmark (38/50) required for this role. Recommended to focus on Data Structures and Java."
+                         }
+                     ],
+    "interviews":  [
+                       {
+                           "candidateId":  "FH1002",
+                           "jobTitle":  "Systems Engineer (Infosys)",
+                           "date":  "2026-10-02",
+                           "time":  "11:00 AM",
+                           "round":  "Technical Round 1",
+                           "interviewer":  "Senior System Architect",
+                           "status":  "Scheduled"
+                       },
+                       {
+                           "candidateId":  "FH1003",
+                           "jobTitle":  "Java Developer (ABC Tech)",
+                           "date":  "2026-09-18",
+                           "time":  "02:30 PM",
+                           "round":  "HR / Leadership Discussion",
+                           "interviewer":  "Director of Engineering",
+                           "status":  "Completed"
+                       }
+                   ],
+    "notifications":  [
+                          {
+                              "id":  "notif-1",
+                              "title":  "New Case Assessment Submitted",
+                              "message":  "Candidate FH1001 completed Zoho Software Developer Case Assessment (Score: 5/6 - 83%).",
+                              "time":  "10 mins ago",
+                              "type":  "success"
+                          },
+                          {
+                              "id":  "notif-2",
+                              "title":  "Interview Request Dispatched",
+                              "message":  "Technical Interview scheduled for Ananya Sen (FH1002) on Oct 02, 2026 at 11:00 AM.",
+                              "time":  "1 hour ago",
+                              "type":  "info"
+                          }
+                      ],
+    "auditHistory":  [
+                         {
+                             "id":  "AUD-1001",
+                             "candidateId":  "FH1003",
+                             "action":  "Accepted",
+                             "recruiter":  "FairHire Demo Recruiter",
+                             "reason":  "Outstanding technical performance across General Assessment (14/15) and Case Study (6/6).",
+                             "timestamp":  "2026-09-18"
+                         },
+                         {
+                             "id":  "AUD-1002",
+                             "candidateId":  "FH1004",
+                             "action":  "Rejected",
+                             "recruiter":  "FairHire Demo Recruiter",
+                             "reason":  "General Assessment score (8/15) fell below minimum role cutoff.",
+                             "timestamp":  "2026-09-11"
+                         }
+                     ]
+}

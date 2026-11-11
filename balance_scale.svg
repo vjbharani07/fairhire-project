@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%" fill="none">
+  <defs>
+    <!-- Premium Brushed Gold Gradients -->
+    <linearGradient id="goldMetallic" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a" />
+      <stop offset="25%" stop-color="#f59e0b" />
+      <stop offset="60%" stop-color="#d97706" />
+      <stop offset="85%" stop-color="#b45309" />
+      <stop offset="100%" stop-color="#78350f" />
+    </linearGradient>
+
+    <linearGradient id="goldBright" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fffbeb" />
+      <stop offset="40%" stop-color="#fde68a" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </linearGradient>
+
+    <!-- Royal Violet / Indigo Metallic Gradients -->
+    <linearGradient id="violetMetallic" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e9d5ff" />
+      <stop offset="30%" stop-color="#a855f7" />
+      <stop offset="70%" stop-color="#7c3aed" />
+      <stop offset="100%" stop-color="#4338ca" />
+    </linearGradient>
+
+    <linearGradient id="panInnerGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#c084fc" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#6366f1" stop-opacity="0.1" />
+    </linearGradient>
+
+    <!-- Soft Drop Shadow Filter -->
+    <filter id="logoShadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#0f172a" flood-opacity="0.3" />
+    </filter>
+
+    <filter id="glowLight" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <g filter="url(#logoShadow)">
+    <!-- Base Pedestal (Tier 1: Bottom Wide Plinth) -->
+    <rect x="36" y="103" width="48" height="6" rx="3" fill="url(#goldMetallic)" />
+    <!-- Base Pedestal (Tier 2: Stepped Ring) -->
+    <rect x="44" y="98" width="32" height="6" rx="2" fill="url(#goldBright)" />
+    <!-- Base Pedestal (Tier 3: Collar) -->
+    <path d="M53 98 L55 93 L65 93 L67 98 Z" fill="url(#goldMetallic)" />
+
+    <!-- Center Tapered Column / Pillar -->
+    <path d="M57 93 L58.5 35 L61.5 35 L63 93 Z" fill="url(#goldMetallic)" />
+    <!-- Pillar Highlight Strip -->
+    <line x1="60" y1="35" x2="60" y2="93" stroke="#fef9c3" stroke-width="1.2" stroke-linecap="round" opacity="0.8" />
+
+    <!-- Central Fulcrum & Finial -->
+    <!-- Decorative Finial Spire -->
+    <path d="M60 11 L63.5 17 L60 21 L56.5 17 Z" fill="url(#goldBright)" />
+    <circle cx="60" cy="11" r="1.8" fill="#fef08a" />
+
+    <!-- Fulcrum Collar & Hub -->
+    <rect x="56" y="21" width="8" height="4" rx="1.5" fill="url(#goldMetallic)" />
+    <circle cx="60" cy="30" r="7.5" fill="url(#goldMetallic)" stroke="#fef08a" stroke-width="1" />
+    <circle cx="60" cy="30" r="4.5" fill="url(#violetMetallic)" />
+    <circle cx="60" cy="30" r="2" fill="#fef08a" />
+
+    <!-- Vertical Indicator Pointer (Needle of Truth/Fairness) -->
+    <polygon points="59.2,30 60.8,30 60,19" fill="#fef08a" />
+
+    <!-- Horizontal Balanced Crossbeam -->
+    <!-- Main Beam Bar -->
+    <rect x="18" y="28" width="84" height="4.5" rx="2.25" fill="url(#goldMetallic)" />
+    <!-- Upper Beam Sheen -->
+    <line x1="22" y1="29.2" x2="98" y2="29.2" stroke="#fffbeb" stroke-width="1" stroke-linecap="round" opacity="0.85" />
+
+    <!-- Left Pivot Ring & Finial -->
+    <circle cx="18" cy="30.25" r="5" fill="url(#goldMetallic)" stroke="#fde68a" stroke-width="0.8" />
+    <circle cx="18" cy="30.25" r="2.2" fill="#1e1b4b" />
+
+    <!-- Right Pivot Ring & Finial -->
+    <circle cx="102" cy="30.25" r="5" fill="url(#goldMetallic)" stroke="#fde68a" stroke-width="0.8" />
+    <circle cx="102" cy="30.25" r="2.2" fill="#1e1b4b" />
+
+    <!-- LEFT SCALE SUSPENSION & PAN -->
+    <!-- Dual Suspension Chains -->
+    <line x1="18" y1="33" x2="8" y2="64" stroke="url(#violetMetallic)" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="2.5 1.5" />
+    <line x1="18" y1="33" x2="28" y2="64" stroke="url(#violetMetallic)" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="2.5 1.5" />
+    <!-- Suspension Ring attachments -->
+    <circle cx="8" cy="64" r="1.5" fill="#f59e0b" />
+    <circle cx="28" cy="64" r="1.5" fill="#f59e0b" />
+
+    <!-- Left Bowl / Weighing Pan -->
+    <!-- Inner Bowl glow -->
+    <path d="M6 64 C6 79, 30 79, 30 64 Z" fill="url(#panInnerGlow)" />
+    <!-- Pan Rim Outer -->
+    <ellipse cx="18" cy="64" rx="12" ry="2.8" fill="url(#goldBright)" stroke="#b45309" stroke-width="0.8" />
+    <!-- Deep Bowl Shell -->
+    <path d="M6 64 C6 79, 30 79, 30 64" fill="none" stroke="url(#goldMetallic)" stroke-width="3.2" stroke-linecap="round" />
+    <path d="M6 64 C6 79, 30 79, 30 64" fill="url(#violetMetallic)" opacity="0.3" />
+    <!-- Pan Bottom Rim Highlight -->
+    <path d="M10 68 C12 76, 24 76, 26 68" fill="none" stroke="#fef08a" stroke-width="1" opacity="0.8" />
+
+    <!-- RIGHT SCALE SUSPENSION & PAN -->
+    <!-- Dual Suspension Chains -->
+    <line x1="102" y1="33" x2="92" y2="64" stroke="url(#violetMetallic)" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="2.5 1.5" />
+    <line x1="102" y1="33" x2="112" y2="64" stroke="url(#violetMetallic)" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="2.5 1.5" />
+    <!-- Suspension Ring attachments -->
+    <circle cx="92" cy="64" r="1.5" fill="#f59e0b" />
+    <circle cx="112" cy="64" r="1.5" fill="#f59e0b" />
+
+    <!-- Right Bowl / Weighing Pan -->
+    <!-- Inner Bowl glow -->
+    <path d="M90 64 C90 79, 114 79, 114 64 Z" fill="url(#panInnerGlow)" />
+    <!-- Pan Rim Outer -->
+    <ellipse cx="102" cy="64" rx="12" ry="2.8" fill="url(#goldBright)" stroke="#b45309" stroke-width="0.8" />
+    <!-- Deep Bowl Shell -->
+    <path d="M90 64 C90 79, 114 79, 114 64" fill="none" stroke="url(#goldMetallic)" stroke-width="3.2" stroke-linecap="round" />
+    <path d="M90 64 C90 79, 114 79, 114 64" fill="url(#violetMetallic)" opacity="0.3" />
+    <!-- Pan Bottom Rim Highlight -->
+    <path d="M94 68 C96 76, 108 76, 110 68" fill="none" stroke="#fef08a" stroke-width="1" opacity="0.8" />
+  </g>
+</svg>

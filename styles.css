@@ -1,0 +1,899 @@
+/* FairHire - Custom Design System & Utility Enhancements */
+:root {
+  --navy-900: #0a0f1d;
+  --navy-800: #0f172a;
+  --navy-700: #1e293b;
+  --navy-600: #334155;
+  --blue-primary: #2563eb;
+  --blue-hover: #1d4ed8;
+  --purple-accent: #7c3aed;
+  --emerald-success: #10b981;
+  --amber-warning: #f59e0b;
+  --rose-danger: #ef4444;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Scoped clean scrollbar for HR portal */
+#view-hr ::-webkit-scrollbar-track {
+  background: #f8fafc;
+}
+#view-hr ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+}
+
+/* Soft transitions */
+* {
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Light Theme Card Utilities */
+.light-card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.03);
+}
+
+.light-card-hover {
+  transition: all 0.2s ease-in-out;
+}
+.light-card-hover:hover {
+  border-color: #93c5fd;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+}
+
+/* Quiz Option Selectable Cards */
+.quiz-option-card {
+  border: 1.5px solid #e2e8f0;
+  background-color: #ffffff;
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+.quiz-option-card:hover {
+  border-color: #93c5fd;
+  background-color: #f8fafc;
+}
+.quiz-option-card.selected {
+  border-color: #2563eb;
+  background-color: #eff6ff;
+  box-shadow: 0 0 0 1px #2563eb;
+}
+
+/* Question Palette item */
+.palette-btn {
+  width: 2.25rem;
+  height: 2.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+.palette-btn.current {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+.palette-btn.answered {
+  background-color: #dbeafe;
+  color: #1d4ed8;
+  border: 1px solid #93c5fd;
+}
+.palette-btn.unanswered {
+  background-color: #f1f5f9;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+}
+.palette-btn.unanswered:hover {
+  background-color: #e2e8f0;
+  color: #334155;
+}
+
+/* Circular Score Gauge */
+.score-circle-svg {
+  transform: rotate(-90deg);
+}
+
+.score-circle-bg {
+  fill: none;
+  stroke: #e2e8f0;
+  stroke-width: 10;
+}
+
+.score-circle-bar {
+  fill: none;
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke: url(#scoreGradient);
+  transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Glassmorphism Cards (Used in HR & Heritage sections) */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-card {
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-card:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.45);
+}
+
+/* Pulse badge */
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2.5s infinite;
+}
+
+/* Modal Backdrop */
+.modal-backdrop {
+  background-color: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+/* Status Badges */
+.badge-eligible {
+  background-color: rgba(16, 185, 129, 0.12);
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.badge-locked {
+  background-color: rgba(245, 158, 11, 0.12);
+  color: #d97706;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.badge-accepted {
+  background-color: rgba(16, 185, 129, 0.12);
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.badge-pending {
+  background-color: rgba(59, 130, 246, 0.12);
+  color: #2563eb;
+  border: 1px solid rgba(59, 130, 246, 0.25);
+}
+
+.badge-rejected {
+  background-color: rgba(239, 68, 68, 0.12);
+  color: #dc2626;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.badge-interview {
+  background-color: rgba(37, 99, 235, 0.12);
+  color: #1d4ed8;
+  border: 1px solid rgba(37, 99, 235, 0.25);
+}
+
+/* Corporate Table Row Hover */
+.hr-table-row {
+  transition: background-color 0.15s ease;
+}
+.hr-table-row:hover {
+  background-color: #f8fafc;
+}
+
+/* Toast animations */
+@keyframes slide-in-bottom {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in-bottom 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ========================================================
+   CANDIDATE PORTAL: REFINED NOT-TOO-DARK SLATE DESIGN SYSTEM
+   ======================================================== */
+.candidate-portal-bg {
+  background: 
+    radial-gradient(circle at 10% 10%, rgba(99, 102, 241, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 90% 15%, rgba(168, 85, 247, 0.09) 0%, transparent 45%),
+    radial-gradient(circle at 50% 90%, rgba(16, 185, 129, 0.06) 0%, transparent 50%),
+    #0d1424 !important; /* Elegant midnight slate (not pitch black) */
+  color: #f1f5f9 !important;
+}
+
+.candidate-sidebar-luxury {
+  background: linear-gradient(180deg, #090d16 0%, #0d1222 50%, #111728 100%) !important;
+  border-right: 1px solid rgba(99, 102, 241, 0.18) !important;
+}
+
+.cand-nav-active {
+  background: linear-gradient(135deg, #6366f1 0%, #7c3aed 50%, #a855f7 100%) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 14px -1px rgba(124, 58, 237, 0.4) !important;
+  border-left: 4px solid #c084fc !important;
+}
+
+/* Glass cards & Containers in Candidate Dark Theme */
+.candidate-portal-bg .cand-glass-card,
+.candidate-portal-bg .light-card,
+.candidate-portal-bg .bg-white,
+.candidate-portal-bg .bg-white\/90,
+.candidate-portal-bg .bg-white\/95 {
+  background-color: #172033 !important;
+  border-color: rgba(99, 102, 241, 0.2) !important;
+  color: #f8fafc !important;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.45) !important;
+}
+
+.candidate-portal-bg .cand-glass-card:hover {
+  border-color: rgba(129, 140, 248, 0.35) !important;
+  box-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Secondary Panels, Sections, and Nested Strips */
+.candidate-portal-bg .bg-slate-50,
+.candidate-portal-bg .bg-slate-100,
+.candidate-portal-bg .bg-slate-100\/50,
+.candidate-portal-bg .bg-slate-100\/70,
+.candidate-portal-bg .bg-slate-100\/80 {
+  background-color: rgba(13, 20, 36, 0.8) !important;
+  border-color: rgba(148, 163, 184, 0.16) !important;
+  color: #e2e8f0 !important;
+}
+
+/* Tinted feature blocks in dark mode */
+.candidate-portal-bg .bg-indigo-50,
+.candidate-portal-bg .bg-indigo-50\/30,
+.candidate-portal-bg .bg-indigo-50\/40,
+.candidate-portal-bg .bg-indigo-50\/50,
+.candidate-portal-bg .bg-indigo-50\/60 {
+  background-color: rgba(30, 27, 75, 0.5) !important;
+  border-color: rgba(99, 102, 241, 0.28) !important;
+  color: #e0e7ff !important;
+}
+
+.candidate-portal-bg .bg-purple-50,
+.candidate-portal-bg .bg-purple-50\/30,
+.candidate-portal-bg .bg-purple-50\/40,
+.candidate-portal-bg .bg-purple-50\/50,
+.candidate-portal-bg .bg-purple-50\/60,
+.candidate-portal-bg .bg-purple-100 {
+  background-color: rgba(59, 7, 100, 0.35) !important;
+  border-color: rgba(168, 85, 247, 0.28) !important;
+  color: #f3e8ff !important;
+}
+
+.candidate-portal-bg .bg-violet-50,
+.candidate-portal-bg .bg-violet-50\/50,
+.candidate-portal-bg .bg-violet-50\/60,
+.candidate-portal-bg .bg-violet-100 {
+  background-color: rgba(46, 16, 101, 0.35) !important;
+  border-color: rgba(139, 92, 246, 0.28) !important;
+  color: #ede9fe !important;
+}
+
+.candidate-portal-bg .bg-emerald-50,
+.candidate-portal-bg .bg-emerald-50\/50,
+.candidate-portal-bg .bg-emerald-100 {
+  background-color: rgba(6, 78, 59, 0.35) !important;
+  border-color: rgba(16, 185, 129, 0.3) !important;
+  color: #d1fae5 !important;
+}
+
+.candidate-portal-bg .bg-amber-50,
+.candidate-portal-bg .bg-amber-50\/50,
+.candidate-portal-bg .bg-amber-100 {
+  background-color: rgba(120, 53, 15, 0.35) !important;
+  border-color: rgba(245, 158, 11, 0.3) !important;
+  color: #fef3c7 !important;
+}
+
+.candidate-portal-bg .bg-rose-50,
+.candidate-portal-bg .bg-rose-50\/50,
+.candidate-portal-bg .bg-rose-100 {
+  background-color: rgba(136, 19, 55, 0.35) !important;
+  border-color: rgba(244, 63, 94, 0.3) !important;
+  color: #ffe4e6 !important;
+}
+
+.candidate-portal-bg .bg-cyan-50,
+.candidate-portal-bg .bg-cyan-50\/50,
+.candidate-portal-bg .bg-cyan-100 {
+  background-color: rgba(22, 78, 99, 0.35) !important;
+  border-color: rgba(6, 182, 212, 0.3) !important;
+  color: #cffafe !important;
+}
+
+/* Text Hierarchy in Candidate Dark Theme */
+.candidate-portal-bg .text-slate-900,
+.candidate-portal-bg .text-slate-800,
+.candidate-portal-bg .text-indigo-950,
+.candidate-portal-bg .text-indigo-900,
+.candidate-portal-bg .text-violet-950,
+.candidate-portal-bg .text-violet-900,
+.candidate-portal-bg .text-emerald-950,
+.candidate-portal-bg .text-emerald-900,
+.candidate-portal-bg .text-amber-950,
+.candidate-portal-bg .text-amber-900,
+.candidate-portal-bg .text-rose-950,
+.candidate-portal-bg .text-rose-900,
+.candidate-portal-bg .text-cyan-950,
+.candidate-portal-bg .text-cyan-900,
+.candidate-portal-bg .text-purple-950,
+.candidate-portal-bg .text-purple-900 {
+  color: #f8fafc !important; /* Bright, high-contrast headings */
+}
+
+.candidate-portal-bg .text-indigo-800,
+.candidate-portal-bg .text-indigo-700 {
+  color: #818cf8 !important; /* Bright readable indigo */
+}
+
+.candidate-portal-bg .text-purple-800,
+.candidate-portal-bg .text-purple-700 {
+  color: #c084fc !important; /* Bright readable purple */
+}
+
+.candidate-portal-bg .text-emerald-800,
+.candidate-portal-bg .text-emerald-700 {
+  color: #34d399 !important; /* Bright readable emerald */
+}
+
+.candidate-portal-bg .text-amber-800,
+.candidate-portal-bg .text-amber-700 {
+  color: #fbbf24 !important; /* Bright readable amber */
+}
+
+.candidate-portal-bg .text-violet-800,
+.candidate-portal-bg .text-violet-700 {
+  color: #a78bfa !important; /* Bright readable violet */
+}
+
+.candidate-portal-bg .text-slate-700 {
+  color: #cbd5e1 !important; /* Slate-300 readable body */
+}
+
+.candidate-portal-bg .text-slate-600,
+.candidate-portal-bg .text-slate-500 {
+  color: #94a3b8 !important; /* Slate-400 secondary text */
+}
+
+.candidate-portal-bg .border-slate-100,
+.candidate-portal-bg .border-slate-200,
+.candidate-portal-bg .border-slate-200\/80,
+.candidate-portal-bg .border-slate-300 {
+  border-color: rgba(148, 163, 184, 0.16) !important;
+}
+
+.candidate-portal-bg .border-indigo-100,
+.candidate-portal-bg .border-purple-200,
+.candidate-portal-bg .border-purple-200\/80 {
+  border-color: rgba(99, 102, 241, 0.22) !important;
+}
+
+/* Form Inputs, Selects, and Textareas */
+.candidate-portal-bg input:not([type="checkbox"]):not([type="radio"]),
+.candidate-portal-bg select,
+.candidate-portal-bg textarea {
+  background-color: #0b1120 !important;
+  border-color: #334155 !important;
+  color: #f8fafc !important;
+}
+
+.candidate-portal-bg input:focus,
+.candidate-portal-bg select:focus,
+.candidate-portal-bg textarea:focus {
+  border-color: #818cf8 !important;
+  box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.25) !important;
+  background-color: #0f172a !important;
+}
+
+.candidate-portal-bg .cand-hero-banner {
+  background: linear-gradient(135deg, #3730a3 0%, #581c87 45%, #701a75 80%, #9f1239 100%) !important;
+  box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.5) !important;
+  border: 1px solid rgba(168, 85, 247, 0.3) !important;
+}
+
+.btn-jewel-primary {
+  background: linear-gradient(135deg, #6366f1 0%, #7c3aed 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 12px -1px rgba(99, 102, 241, 0.35);
+}
+.btn-jewel-primary:hover {
+  background: linear-gradient(135deg, #4f46e5 0%, #6d28d9 100%);
+  box-shadow: 0 6px 16px -1px rgba(99, 102, 241, 0.45);
+}
+
+.btn-jewel-coral {
+  background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 12px -1px rgba(244, 63, 94, 0.35);
+}
+.btn-jewel-coral:hover {
+  background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
+}
+
+.btn-jewel-emerald {
+  background: linear-gradient(135deg, #059669 0%, #0d9488 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 12px -1px rgba(5, 150, 105, 0.35);
+}
+.btn-jewel-emerald:hover {
+  background: linear-gradient(135deg, #047857 0%, #0f766e 100%);
+}
+
+.text-gradient-purple {
+  background: linear-gradient(135deg, #7c3aed 0%, #db2777 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Quiz Option Card Luxury Styles */
+.quiz-option-card {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+.quiz-option-card:hover {
+  border-color: #a855f7;
+  background: #faf5ff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.1);
+}
+.quiz-option-card.selected {
+  border: 2px solid #7c3aed !important;
+  background: linear-gradient(135deg, rgba(238, 242, 255, 0.95) 0%, rgba(250, 245, 255, 0.95) 100%) !important;
+  box-shadow: 0 6px 18px -2px rgba(124, 58, 237, 0.22) !important;
+}
+
+/* Candidate Portal Dark Mode Quiz Options */
+.candidate-portal-bg .quiz-option-card {
+  background-color: #172033 !important;
+  border: 1.5px solid #2d3b55 !important;
+  color: #f1f5f9 !important;
+}
+.candidate-portal-bg .quiz-option-card:hover {
+  border-color: #818cf8 !important;
+  background-color: #1e2a44 !important;
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.25) !important;
+}
+.candidate-portal-bg .quiz-option-card.selected {
+  border: 2px solid #a855f7 !important;
+  background: linear-gradient(135deg, rgba(49, 46, 129, 0.7) 0%, rgba(88, 28, 135, 0.6) 100%) !important;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.35) !important;
+  color: #ffffff !important;
+}
+
+/* Palette Buttons */
+.palette-btn {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+.palette-btn.unanswered {
+  background-color: #f1f5f9;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+}
+.palette-btn.unanswered:hover {
+  background-color: #e2e8f0;
+  color: #334155;
+  transform: scale(1.05);
+}
+
+.candidate-portal-bg .palette-btn.unanswered {
+  background-color: #172033 !important;
+  color: #94a3b8 !important;
+  border: 1px solid #334155 !important;
+}
+.candidate-portal-bg .palette-btn.unanswered:hover {
+  background-color: #243046 !important;
+  color: #f8fafc !important;
+  border-color: #64748b !important;
+}
+.palette-btn.answered {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35);
+}
+.palette-btn.answered:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  transform: scale(1.08);
+}
+.palette-btn.current {
+  border: 2px solid #7c3aed !important;
+  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.35), 0 4px 10px rgba(124, 58, 237, 0.25) !important;
+  transform: scale(1.1);
+  z-index: 2;
+}
+
+/* Candidate Jewel Badges */
+.cand-tag-emerald {
+  background: linear-gradient(135deg, rgba(209, 250, 229, 0.9) 0%, rgba(167, 243, 208, 0.7) 100%);
+  color: #065f46;
+  border: 1px solid #6ee7b7;
+}
+.cand-tag-violet {
+  background: linear-gradient(135deg, rgba(243, 232, 255, 0.9) 0%, rgba(233, 213, 255, 0.7) 100%);
+  color: #6b21a8;
+  border: 1px solid #d8b4fe;
+}
+.cand-tag-amber {
+  background: linear-gradient(135deg, rgba(254, 243, 199, 0.9) 0%, rgba(253, 230, 138, 0.7) 100%);
+  color: #92400e;
+  border: 1px solid #fcd34d;
+}
+.cand-tag-rose {
+  background: linear-gradient(135deg, rgba(255, 228, 230, 0.9) 0%, rgba(254, 205, 211, 0.7) 100%);
+  color: #9f1239;
+  border: 1px solid #fda4af;
+}
+.cand-tag-cyan {
+  background: linear-gradient(135deg, rgba(207, 250, 254, 0.9) 0%, rgba(165, 243, 252, 0.7) 100%);
+  color: #155e75;
+  border: 1px solid #67e8f9;
+}
+
+/* ========================================================
+   SkillMatch: Transparent Score Page & 4 Pillars Boxes
+   Vivid, high-contrast, beautiful themed colors
+   ======================================================== */
+#candidate-tab-score .pillar-card-academic {
+  background: linear-gradient(145deg, rgba(12, 28, 54, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%) !important;
+  border: 1.5px solid rgba(56, 189, 248, 0.45) !important;
+  box-shadow: 0 10px 30px -6px rgba(14, 165, 233, 0.22) !important;
+}
+#candidate-tab-score .pillar-card-academic:hover {
+  border-color: rgba(56, 189, 248, 0.75) !important;
+  box-shadow: 0 14px 38px -4px rgba(14, 165, 233, 0.35) !important;
+  transform: translateY(-2px);
+}
+
+#candidate-tab-score .pillar-card-technical {
+  background: linear-gradient(145deg, rgba(38, 14, 66, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%) !important;
+  border: 1.5px solid rgba(192, 132, 252, 0.45) !important;
+  box-shadow: 0 10px 30px -6px rgba(168, 85, 247, 0.22) !important;
+}
+#candidate-tab-score .pillar-card-technical:hover {
+  border-color: rgba(192, 132, 252, 0.75) !important;
+  box-shadow: 0 14px 38px -4px rgba(168, 85, 247, 0.35) !important;
+  transform: translateY(-2px);
+}
+
+#candidate-tab-score .pillar-card-certs {
+  background: linear-gradient(145deg, rgba(6, 46, 36, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%) !important;
+  border: 1.5px solid rgba(52, 211, 153, 0.45) !important;
+  box-shadow: 0 10px 30px -6px rgba(16, 185, 129, 0.22) !important;
+}
+#candidate-tab-score .pillar-card-certs:hover {
+  border-color: rgba(52, 211, 153, 0.75) !important;
+  box-shadow: 0 14px 38px -4px rgba(16, 185, 129, 0.35) !important;
+  transform: translateY(-2px);
+}
+
+#candidate-tab-score .pillar-card-projects {
+  background: linear-gradient(145deg, rgba(58, 28, 6, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%) !important;
+  border: 1.5px solid rgba(251, 191, 36, 0.45) !important;
+  box-shadow: 0 10px 30px -6px rgba(245, 158, 11, 0.22) !important;
+}
+#candidate-tab-score .pillar-card-projects:hover {
+  border-color: rgba(251, 191, 36, 0.75) !important;
+  box-shadow: 0 14px 38px -4px rgba(245, 158, 11, 0.35) !important;
+  transform: translateY(-2px);
+}
+
+/* Pillar Titles & Descriptions */
+#candidate-tab-score .pillar-title {
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.01em;
+}
+
+#candidate-tab-score .pillar-desc {
+  color: #cbd5e1 !important; /* High-contrast crisp silver slate */
+  font-size: 0.8rem !important;
+  line-height: 1.5 !important;
+}
+
+/* Pillar Scores High-Contrast Styling */
+#candidate-tab-score #score-academic-val {
+  color: #38bdf8 !important; /* Bright Electric Sky Cyan */
+  font-weight: 900 !important;
+  font-size: 1.6rem !important;
+  text-shadow: 0 0 14px rgba(56, 189, 248, 0.45);
+}
+
+#candidate-tab-score #score-technical-val {
+  color: #c084fc !important; /* Bright Neon Lilac Purple */
+  font-weight: 900 !important;
+  font-size: 1.6rem !important;
+  text-shadow: 0 0 14px rgba(192, 132, 252, 0.45);
+}
+
+#candidate-tab-score #score-certs-val {
+  color: #34d399 !important; /* Bright Mint Emerald */
+  font-weight: 900 !important;
+  font-size: 1.6rem !important;
+  text-shadow: 0 0 14px rgba(52, 211, 153, 0.45);
+}
+
+#candidate-tab-score #score-projects-val {
+  color: #fbbf24 !important; /* Bright Radiant Gold */
+  font-weight: 900 !important;
+  font-size: 1.6rem !important;
+  text-shadow: 0 0 14px rgba(251, 191, 36, 0.45);
+}
+
+/* Why Button Links */
+#candidate-tab-score .why-link-academic {
+  color: #38bdf8 !important;
+}
+#candidate-tab-score .why-link-academic:hover {
+  color: #7dd3fc !important;
+}
+
+#candidate-tab-score .why-link-technical {
+  color: #c084fc !important;
+}
+#candidate-tab-score .why-link-technical:hover {
+  color: #e9d5ff !important;
+}
+
+#candidate-tab-score .why-link-certs {
+  color: #34d399 !important;
+}
+#candidate-tab-score .why-link-certs:hover {
+  color: #a7f3d0 !important;
+}
+
+#candidate-tab-score .why-link-projects {
+  color: #fbbf24 !important;
+}
+#candidate-tab-score .why-link-projects:hover {
+  color: #fef08a !important;
+}
+
+/* Explanation Boxes Text Color Enforcements */
+#why-academic-box,
+#why-academic-box p,
+#why-academic-text {
+  color: #f0f9ff !important; /* Ultra-clear Sky White */
+  background-color: rgba(8, 47, 73, 0.9) !important;
+  border-color: rgba(56, 189, 248, 0.5) !important;
+}
+
+#why-technical-box,
+#why-technical-box p,
+#why-technical-text {
+  color: #faf5ff !important; /* Ultra-clear Lilac White */
+  background-color: rgba(59, 7, 100, 0.9) !important;
+  border-color: rgba(192, 132, 252, 0.5) !important;
+}
+
+#why-certs-box,
+#why-certs-box p,
+#why-certs-text {
+  color: #ecfdf5 !important; /* Ultra-clear Mint White */
+  background-color: rgba(6, 78, 59, 0.9) !important;
+  border-color: rgba(52, 211, 153, 0.5) !important;
+}
+
+#why-projects-box,
+#why-projects-box p,
+#why-projects-text {
+  color: #fffbeb !important; /* Ultra-clear Gold White */
+  background-color: rgba(120, 53, 15, 0.9) !important;
+  border-color: rgba(251, 191, 36, 0.5) !important;
+}
+
+/* ========================================================
+   SkillMatch: ELEGANT OBSIDIAN LUXURY LANDING DESIGN SYSTEM
+   ======================================================== */
+.landing-elegant-bg {
+  background: 
+    radial-gradient(circle at 50% 25%, rgba(99, 102, 241, 0.18) 0%, transparent 55%),
+    radial-gradient(circle at 12% 18%, rgba(168, 85, 247, 0.14) 0%, transparent 45%),
+    radial-gradient(circle at 88% 22%, rgba(245, 158, 11, 0.11) 0%, transparent 45%),
+    radial-gradient(circle at 50% 88%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+    linear-gradient(180deg, #070a13 0%, #0c1220 50%, #070a14 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.tech-grid-overlay {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.85) 0%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.85) 0%, transparent 75%);
+}
+
+.text-gradient-elegant {
+  background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 20%, #c084fc 60%, #fde68a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.portal-card-glass {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0.015) 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.portal-card-glass:hover {
+  transform: translateY(-5px);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.075) 0%, rgba(255, 255, 255, 0.025) 100%);
+  border-color: rgba(168, 85, 247, 0.4);
+  box-shadow: 0 20px 50px -10px rgba(124, 58, 237, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.portal-card-glass-gold:hover {
+  border-color: rgba(245, 158, 11, 0.45) !important;
+  box-shadow: 0 20px 50px -10px rgba(245, 158, 11, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+}
+
+.floating-badge-glass {
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+@keyframes floatSlow1 {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-7px); }
+}
+@keyframes floatSlow2 {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(7px); }
+}
+.animate-float-1 { animation: floatSlow1 6s ease-in-out infinite; }
+.animate-float-2 { animation: floatSlow2 7s ease-in-out infinite; }
+.animate-float-3 { animation: floatSlow1 8s ease-in-out infinite 1s; }
+.animate-float-4 { animation: floatSlow2 7.5s ease-in-out infinite 0.5s; }
+
+@keyframes haloPulse {
+  0%, 100% { transform: scale(1); opacity: 0.35; }
+  50% { transform: scale(1.06); opacity: 0.65; }
+}
+.animate-halo {
+  animation: haloPulse 6s ease-in-out infinite;
+}
+
+.landing-classic-bg {
+  background: 
+    radial-gradient(circle at 10% 12%, rgba(99, 102, 241, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 90% 15%, rgba(217, 70, 239, 0.10) 0%, transparent 40%),
+    radial-gradient(circle at 50% 45%, rgba(245, 158, 11, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 15% 75%, rgba(16, 185, 129, 0.09) 0%, transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(6, 182, 212, 0.09) 0%, transparent 40%),
+    #fafafa;
+}
+
+.text-gradient-skillmatch,
+.text-gradient-bankp,
+.text-gradient-bnkp {
+  background: linear-gradient(135deg, #3730a3 0%, #6366f1 35%, #9333ea 70%, #d946ef 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, #b45309 0%, #d97706 40%, #f59e0b 80%, #fbbf24 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.btn-classic-gold {
+  background: linear-gradient(135deg, #d97706 0%, #b45309 50%, #92400e 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 14px -1px rgba(217, 119, 6, 0.4);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+.btn-classic-gold:hover {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #b45309 100%);
+  box-shadow: 0 6px 20px -1px rgba(217, 119, 6, 0.55);
+}
+
+.btn-classic-dark {
+  background: linear-gradient(135deg, #090d16 0%, #15142b 100%);
+  color: #ffffff;
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  box-shadow: 0 4px 14px -1px rgba(9, 13, 22, 0.4);
+}
+.btn-classic-dark:hover {
+  background: linear-gradient(135deg, #15142b 0%, #1f1b4a 100%);
+  border-color: rgba(192, 132, 252, 0.6);
+  box-shadow: 0 6px 20px -1px rgba(124, 58, 237, 0.4);
+}
+
+.classic-jewel-card {
+  background: #ffffff;
+  border: 1.5px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 10px 30px -5px rgba(99, 102, 241, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.classic-jewel-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 35px -5px rgba(99, 102, 241, 0.15), 0 8px 12px -3px rgba(0, 0, 0, 0.04);
+}
+
+.classic-step-card {
+  background: #ffffff;
+  border-radius: 1.25rem;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+.classic-step-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px -6px rgba(15, 23, 42, 0.12);
+}
+
+.classic-feature-card {
+  background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%);
+  border: 1.5px solid #e2e8f0;
+  box-shadow: 0 12px 35px -8px rgba(99, 102, 241, 0.09);
+  transition: all 0.3s ease;
+}
+.classic-feature-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px -10px rgba(99, 102, 241, 0.16);
+}
+
+.classic-comparison-table tr:hover td {
+  background-color: rgba(248, 250, 252, 0.8);
+}
+
+
+

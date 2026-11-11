@@ -1,0 +1,2495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkillMatch — Merit-First Fair Hiring & Technical Placement</title>
+  <link rel="icon" type="image/svg+xml" href="assets/balance_scale.svg">
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+            },
+            navy: {
+              800: '#0f172a',
+              900: '#0a0f1d',
+              950: '#060913',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col selection:bg-indigo-600 selection:text-white">
+
+  <!-- ========================================================= -->
+  <!-- SkillMatch GLOBAL NAVBAR (Sticky Top Bar - Obsidian Glass) -->
+  <!-- ========================================================= -->
+  <header class="bg-slate-950/85 border-b border-white/10 backdrop-blur-xl sticky top-0 z-50 px-4 py-2.5 text-xs flex flex-wrap items-center justify-between gap-3 shadow-lg shadow-black/30">
+    <div class="flex items-center gap-2.5 cursor-pointer" onclick="app.setRole('landing')">
+      <div class="flex items-center gap-2 font-bold tracking-tight text-white text-sm">
+        <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-slate-900 via-indigo-950 to-purple-950 border border-amber-400/40 flex items-center justify-center p-1.5 shadow-md shadow-indigo-600/30 shrink-0">
+          <img src="assets/balance_scale.svg" alt="SkillMatch Balance Scale Logo" class="w-full h-full object-contain">
+        </div>
+        <span class="font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-indigo-200 to-amber-300 tracking-tight text-base sm:text-lg">SkillMatch</span>
+      </div>
+      <span class="text-white/20 hidden sm:inline">|</span>
+      <span class="text-slate-400 hidden sm:inline text-[11px] font-medium tracking-wide">Merit-First Technical Hiring & Skill Audit</span>
+    </div>
+
+    <!-- Role Switcher -->
+    <div class="flex items-center gap-1 bg-slate-900/90 p-1 rounded-xl border border-white/10 shadow-inner">
+      <span class="text-slate-400 px-2 font-mono text-[10px] hidden md:inline">DEMO VIEW:</span>
+      <button data-switch-role="landing" data-role-indicator="landing" class="px-3 py-1.5 rounded-lg font-semibold transition text-slate-300 hover:text-white">
+        Landing Page
+      </button>
+      <button data-switch-role="candidate" data-role-indicator="candidate" class="px-3 py-1.5 rounded-lg font-semibold transition text-slate-300 hover:text-white">
+        Candidate Portal
+      </button>
+      <button data-switch-role="hr" data-role-indicator="hr" class="px-3 py-1.5 rounded-lg font-semibold transition text-slate-300 hover:text-white">
+        HR Recruiter Portal
+      </button>
+    </div>
+
+    <!-- Quick Utilities -->
+    <div class="flex items-center gap-2">
+      <div class="backend-status-badge"></div>
+      <button id="reset-demo-btn" class="text-[11px] px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-white/10 font-medium transition cursor-pointer" title="Restore default demo state">
+        ↺ Reset Data
+      </button>
+      <button id="open-transparency-modal-btn" class="text-[11px] px-3 py-1.5 rounded-lg bg-gradient-to-r from-purple-900/60 to-indigo-900/60 hover:from-purple-800/80 hover:to-indigo-800/80 text-purple-200 border border-purple-500/30 font-semibold transition shadow-xs cursor-pointer">
+        🛡️ Transparency Charter
+      </button>
+    </div>
+  </header>
+
+  <!-- ========================================================= -->
+  <!-- 1. LANDING PAGE VIEW -->
+  <!-- ========================================================= -->
+  <main id="view-landing" class="flex-1 landing-elegant-bg text-slate-100 flex flex-col items-center justify-center p-6 sm:p-12 relative overflow-hidden min-h-[calc(100vh-56px)] select-none">
+    
+    <!-- Tech Precision Grid Overlay (Adds high-end architectural depth) -->
+    <div class="tech-grid-overlay absolute inset-0 pointer-events-none"></div>
+
+    <!-- Atmospheric Aurora Blooms -->
+    <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[720px] h-[400px] bg-gradient-to-b from-indigo-500/20 via-purple-600/15 to-transparent blur-3xl pointer-events-none rounded-full"></div>
+    <div class="absolute -bottom-24 left-1/4 w-[480px] h-[360px] bg-gradient-to-tr from-amber-500/10 via-rose-500/5 to-transparent blur-3xl pointer-events-none rounded-full"></div>
+    <div class="absolute -bottom-24 right-1/4 w-[480px] h-[360px] bg-gradient-to-tl from-cyan-500/10 via-indigo-500/5 to-transparent blur-3xl pointer-events-none rounded-full"></div>
+
+    <!-- Concentric Ambient Orbital Light Rings behind Crest -->
+    <div class="absolute top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] rounded-full border border-indigo-500/10 pointer-events-none animate-halo"></div>
+    <div class="absolute top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] h-[380px] rounded-full border border-purple-500/15 pointer-events-none"></div>
+    <div class="absolute top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[240px] h-[240px] rounded-full border border-amber-400/20 pointer-events-none"></div>
+
+    <!-- Peripheral Floating Glass Badges (Decorates the space elegantly without cluttering the center) -->
+    <!-- Top-Left Floating Badge -->
+    <div class="hidden xl:flex items-center gap-3 px-4 py-2.5 rounded-2xl floating-badge-glass animate-float-1 absolute top-20 left-16 max-w-[220px] pointer-events-none">
+      <div class="w-8 h-8 rounded-xl bg-indigo-500/20 border border-indigo-400/30 flex items-center justify-center text-sm shadow-sm shrink-0">
+        ⚖️
+      </div>
+      <div>
+        <p class="text-[11px] font-bold text-white leading-tight">Blind Auditing</p>
+        <p class="text-[9px] text-indigo-300 uppercase tracking-wider font-mono">100% Anti-Bias</p>
+      </div>
+    </div>
+
+    <!-- Top-Right Floating Badge -->
+    <div class="hidden xl:flex items-center gap-3 px-4 py-2.5 rounded-2xl floating-badge-glass animate-float-2 absolute top-20 right-16 max-w-[220px] pointer-events-none">
+      <div class="w-8 h-8 rounded-xl bg-amber-500/20 border border-amber-400/30 flex items-center justify-center text-sm shadow-sm shrink-0">
+        ✨
+      </div>
+      <div>
+        <p class="text-[11px] font-bold text-white leading-tight">Verified Merit</p>
+        <p class="text-[9px] text-amber-300 uppercase tracking-wider font-mono">100pt Standard</p>
+      </div>
+    </div>
+
+    <!-- Bottom-Left Floating Badge -->
+    <div class="hidden xl:flex items-center gap-3 px-4 py-2.5 rounded-2xl floating-badge-glass animate-float-3 absolute bottom-24 left-16 max-w-[220px] pointer-events-none">
+      <div class="w-8 h-8 rounded-xl bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center text-sm shadow-sm shrink-0">
+        🛡️
+      </div>
+      <div>
+        <p class="text-[11px] font-bold text-white leading-tight">Tamper Proof</p>
+        <p class="text-[9px] text-emerald-300 uppercase tracking-wider font-mono">SHA-256 Audit Trail</p>
+      </div>
+    </div>
+
+    <!-- Bottom-Right Floating Badge -->
+    <div class="hidden xl:flex items-center gap-3 px-4 py-2.5 rounded-2xl floating-badge-glass animate-float-4 absolute bottom-24 right-16 max-w-[220px] pointer-events-none">
+      <div class="w-8 h-8 rounded-xl bg-purple-500/20 border border-purple-400/30 flex items-center justify-center text-sm shadow-sm shrink-0">
+        🎯
+      </div>
+      <div>
+        <p class="text-[11px] font-bold text-white leading-tight">Campus Matching</p>
+        <p class="text-[9px] text-purple-300 uppercase tracking-wider font-mono">Equitable Hiring</p>
+      </div>
+    </div>
+
+    <!-- Centered Minimal Brand & Portal Access Container -->
+    <div class="relative z-10 max-w-2xl w-full text-center space-y-10 my-auto py-8">
+      
+      <!-- Brand Centerpiece -->
+      <div class="space-y-5">
+        <!-- Top Micro-Badge -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-[11px] font-medium text-slate-300 shadow-sm mx-auto">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="tracking-wide">The Fair Technical Placement Standard</span>
+        </div>
+
+        <!-- Luxury Balance Scale Emblem -->
+        <div class="relative inline-flex items-center justify-center mx-auto">
+          <div class="absolute inset-0 rounded-3xl bg-gradient-to-tr from-indigo-500/30 via-purple-500/20 to-amber-500/20 blur-xl"></div>
+          <div class="relative w-28 h-28 rounded-3xl bg-gradient-to-tr from-slate-950 via-slate-900 to-indigo-950 border-2 border-amber-400/50 p-4 shadow-2xl shadow-indigo-950/60 transform hover:scale-105 transition-all duration-300 group cursor-default">
+            <img src="assets/balance_scale.svg" alt="SkillMatch Balance Scale Logo" class="w-full h-full object-contain filter drop-shadow-[0_4px_16px_rgba(245,158,11,0.45)]">
+            <div class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-amber-500 border-2 border-slate-950 flex items-center justify-center text-[10px] text-slate-950 font-black shadow-md">
+              ✓
+            </div>
+          </div>
+        </div>
+        
+        <!-- Brand Name with Liquid Platinum / Amethyst Gradient -->
+        <h1 class="text-6xl sm:text-7xl font-black tracking-tight leading-none">
+          <span class="text-gradient-elegant">SkillMatch</span>
+        </h1>
+        
+        <!-- Subtitle with refined typography -->
+        <p class="text-slate-400 font-medium text-xs sm:text-sm tracking-[0.25em] uppercase max-w-lg mx-auto">
+          Merit-First Technical Hiring & Skill Audit
+        </p>
+      </div>
+
+      <!-- Portal Entry Cards (Candidate Portal & HR Portal) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-xl mx-auto pt-2">
+        
+        <!-- Candidate Portal Card -->
+        <button onclick="app.setRole('candidate')" class="group text-left p-6 sm:p-7 rounded-3xl portal-card-glass flex flex-col justify-between cursor-pointer relative overflow-hidden text-slate-100">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none group-hover:bg-indigo-500/20 transition-all duration-300"></div>
+          <div class="space-y-3 relative z-10">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-600 to-violet-600 text-white flex items-center justify-center text-2xl shadow-lg shadow-indigo-600/30 group-hover:scale-110 transition-transform">
+              🎓
+            </div>
+            <div>
+              <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-indigo-400">Students & Job Seekers</span>
+              <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight mt-0.5">Candidate Portal</h2>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Take verified skill assessments, track deterministic scoring, and apply to matched roles.
+            </p>
+          </div>
+          <div class="mt-6 flex items-center justify-between text-xs font-bold text-indigo-400 group-hover:text-indigo-300 relative z-10">
+            <span>Enter Candidate Portal</span>
+            <span class="w-7 h-7 rounded-full bg-indigo-500/15 border border-indigo-400/30 flex items-center justify-center transform group-hover:translate-x-1 transition-transform">→</span>
+          </div>
+        </button>
+
+        <!-- HR Recruiter Portal Card -->
+        <button onclick="app.setRole('hr')" class="group text-left p-6 sm:p-7 rounded-3xl portal-card-glass portal-card-glass-gold flex flex-col justify-between cursor-pointer relative overflow-hidden text-slate-100">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl pointer-events-none group-hover:bg-amber-500/20 transition-all duration-300"></div>
+          <div class="space-y-3 relative z-10">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-amber-500 to-yellow-600 text-slate-950 flex items-center justify-center text-2xl shadow-lg shadow-amber-500/30 group-hover:scale-110 transition-transform font-bold">
+              🏛️
+            </div>
+            <div>
+              <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-amber-400">Corporate & Talent Leads</span>
+              <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight mt-0.5">HR Portal</h2>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Access the recruiter workspace, review verified candidates, and manage anti-bias hiring.
+            </p>
+          </div>
+          <div class="mt-6 flex items-center justify-between text-xs font-bold text-amber-400 group-hover:text-amber-300 relative z-10">
+            <span>Enter HR Portal</span>
+            <span class="w-7 h-7 rounded-full bg-amber-500/15 border border-amber-400/30 flex items-center justify-center transform group-hover:translate-x-1 transition-transform">→</span>
+          </div>
+        </button>
+
+      </div>
+
+      <!-- Quick Transparency Footer Link -->
+      <div class="pt-2">
+        <button onclick="document.getElementById('open-transparency-modal-btn').click()" class="text-xs font-medium text-slate-400 hover:text-white transition inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full hover:bg-white/5 border border-transparent hover:border-white/10 cursor-pointer">
+          <span class="text-amber-400">🛡️</span>
+          <span>View Transparency Charter & Anti-Bias Audit Standard</span>
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+
+  <!-- ========================================================= -->
+  <!-- 2. CANDIDATE PORTAL VIEW -->
+  <!-- ========================================================= -->
+    <div id="view-candidate" class="flex-1 flex flex-col hidden candidate-portal-bg">
+    <!-- Candidate Auth Gate (If not logged in) -->
+    <div id="candidate-auth-gate" class="flex-1 flex items-center justify-center p-6 candidate-portal-bg">
+      <div class="cand-glass-card max-w-md w-full p-8 sm:p-10 rounded-3xl border border-indigo-100/80 shadow-2xl space-y-6 bg-white/90 backdrop-blur-xl">
+        <div class="text-center">
+          <div class="w-16 h-16 rounded-3xl bg-gradient-to-tr from-slate-900 via-indigo-950 to-purple-950 border border-amber-400/40 p-2.5 flex items-center justify-center mx-auto mb-3 shadow-xl shadow-indigo-600/30">
+            <img src="assets/balance_scale.svg" alt="SkillMatch Balance Scale Logo" class="w-full h-full object-contain filter drop-shadow">
+          </div>
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-violet-950/60 text-violet-300 text-[10px] font-mono font-bold uppercase tracking-wider mb-2 border border-violet-700/50">
+            <span class="w-2 h-2 rounded-full bg-violet-400 animate-ping"></span>
+            SkillMatch • CANDIDATE PORTAL
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Candidate Portal Login</h2>
+          <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+            Access your verified profile, take objective skill assessments, track transparent scoring, and apply to matched opportunities.
+          </p>
+        </div>
+
+        <!-- 1-Click Quick Demo Profiles -->
+        <div class="p-4 rounded-2xl bg-gradient-to-br from-indigo-50/60 to-purple-50/40 border border-indigo-100 space-y-2.5">
+          <div class="flex items-center justify-between text-xs">
+            <span class="text-slate-700 font-bold">Quick Demo Profiles:</span>
+            <span class="text-[11px] font-mono text-violet-700 font-semibold">1-Click Instant Login</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <button type="button" onclick="app.loginDemoCandidate('ragav.v@student.edu')" class="py-2.5 px-3.5 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-semibold text-xs shadow-md shadow-violet-600/25 transition text-left cursor-pointer transform hover:-translate-y-0.5">
+              <span class="block font-bold truncate">⚡ Ragav V</span>
+              <span class="text-[10px] text-violet-200 block truncate">ragav.v@student.edu</span>
+            </button>
+            <button type="button" onclick="app.loginDemoCandidate('arun.kumar@student.edu')" class="py-2.5 px-3.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white font-semibold text-xs shadow-md shadow-emerald-600/25 transition text-left cursor-pointer transform hover:-translate-y-0.5">
+              <span class="block font-bold truncate">⚡ Arun Kumar</span>
+              <span class="text-[10px] text-emerald-200 block truncate">arun.kumar@student.edu</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="relative flex py-1 items-center">
+          <div class="flex-grow border-t border-slate-200"></div>
+          <span class="flex-shrink mx-3 text-slate-400 text-[11px] uppercase tracking-wider font-mono">Or Sign In with Email</span>
+          <div class="flex-grow border-t border-slate-200"></div>
+        </div>
+
+        <!-- Validation Error Message -->
+        <div id="cand-login-error" class="hidden p-3 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-700 font-medium"></div>
+
+        <!-- Candidate Login Form -->
+        <form id="candidate-login-form" onsubmit="app.candidateLogin(event)" class="space-y-4 text-xs">
+          <div>
+            <label class="block text-slate-700 mb-1 font-semibold">Candidate Email</label>
+            <input type="email" id="cand-email-input" value="ragav.v@student.edu" placeholder="e.g. yourname@college.edu" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-slate-900 text-xs focus:border-violet-600 focus:ring-2 focus:ring-violet-200 focus:outline-none shadow-sm" required>
+          </div>
+          <div>
+            <label class="block text-slate-700 mb-1 font-semibold">Password</label>
+            <input type="password" id="cand-password-input" value="student123" placeholder="Enter password" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-slate-900 text-xs focus:border-violet-600 focus:ring-2 focus:ring-violet-200 focus:outline-none shadow-sm" required>
+          </div>
+          <button type="submit" class="btn-jewel-primary w-full py-3.5 rounded-xl font-bold text-xs shadow-lg transition cursor-pointer">
+            Sign In to Candidate Portal →
+          </button>
+        </form>
+
+        <div class="text-center pt-1">
+          <button type="button" onclick="app.setRole('landing')" class="text-xs text-slate-500 hover:text-slate-800 transition font-medium">
+            ← Back to Landing Page
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Candidate Authenticated Dashboard Content -->
+    <div id="candidate-auth-dashboard" class="flex-1 flex flex-col md:flex-row hidden candidate-portal-bg">
+    <!-- Candidate Luxury Twilight Sidebar -->
+    <aside class="w-full md:w-64 candidate-sidebar-luxury p-5 flex flex-col justify-between shrink-0 shadow-2xl">
+      <div>
+        <!-- Profile Snippet -->
+        <div class="p-4 rounded-2xl bg-white/5 border border-white/10 mb-6 flex items-center gap-3 backdrop-blur-md">
+          <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-violet-500 via-purple-500 to-pink-500 flex items-center justify-center font-black text-white text-sm shadow-lg shadow-purple-500/30 cand-avatar-initials shrink-0">
+            RV
+          </div>
+          <div class="overflow-hidden">
+            <h4 class="font-bold text-sm text-white truncate cand-display-name">Ragav V</h4>
+            <p class="text-[11px] text-slate-400 truncate cand-display-email">ragav.v@student.edu</p>
+            <div class="flex items-center gap-1.5 mt-0.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span id="cand-sidebar-id" class="text-[10px] text-purple-300 font-mono font-medium">FH1001 • Verified</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation Links -->
+        <nav class="space-y-1.5 text-xs font-medium">
+          <a href="#" data-tab="dashboard" class="candidate-nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-slate-400 hover:bg-white/5 hover:text-white">
+            <span class="text-indigo-400">📊</span> Dashboard
+          </a>
+          <a href="#" data-tab="instructions" class="candidate-nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-slate-400 hover:bg-white/5 hover:text-white">
+            <span class="text-sky-400">📋</span> Assessment Guide
+          </a>
+          <a href="#" data-tab="assessments" class="candidate-nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-slate-400 hover:bg-white/5 hover:text-white">
+            <span class="text-violet-400">📝</span> Take Assessment
+          </a>
+          <a href="#" data-tab="results" class="candidate-nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-slate-400 hover:bg-white/5 hover:text-white">
+            <span class="text-emerald-400">🎯</span> Assessment Results
+          </a>
+          <a href="#" data-tab="profile" class="candidate-nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-slate-400 hover:bg-white/5 hover:text-white">
+            <span class="text-amber-400">👤</span> My Profile
+          </a>
+          <a href="#" data-tab="score" class="candidate-nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-slate-400 hover:bg-white/5 hover:text-white">
+            <span class="text-rose-400">⚖️</span> SkillMatch Score
+          </a>
+          <a href="#" data-tab="jobs" class="candidate-nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-slate-400 hover:bg-white/5 hover:text-white">
+            <span class="text-teal-400">💼</span> Available Jobs
+          </a>
+          <a href="#" data-tab="applications" class="candidate-nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-slate-400 hover:bg-white/5 hover:text-white">
+            <span class="text-purple-400">📨</span> My Applications
+          </a>
+          <a href="#" data-tab="skillgap" class="candidate-nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-slate-400 hover:bg-white/5 hover:text-white">
+            <span class="text-fuchsia-400">📈</span> Skill Gap Analyzer
+          </a>
+          <a href="#" data-tab="transparency" class="candidate-nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-slate-400 hover:bg-white/5 hover:text-white">
+            <span class="text-cyan-400">🛡️</span> Transparency
+          </a>
+        </nav>
+      </div>
+
+      <div class="pt-6 border-t border-white/10 text-xs space-y-2">
+        <button onclick="app.exitCandidatePortal()" class="w-full py-2.5 px-3 rounded-xl bg-rose-950/40 hover:bg-rose-900/60 text-rose-300 font-semibold text-center block border border-rose-800/50 text-xs transition cursor-pointer">
+          🚪 Exit Candidate Portal
+        </button>
+        <button onclick="app.setRole('landing')" class="w-full py-2.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 font-medium text-center block border border-white/10 text-xs transition cursor-pointer">
+          ← Main Landing Page
+        </button>
+      </div>
+    </aside>
+
+    <!-- Candidate Main Content Area -->
+    <section class="flex-1 candidate-portal-bg p-6 lg:p-8 overflow-y-auto">
+
+      <!-- SUB-TAB: DASHBOARD -->
+      <div id="candidate-tab-dashboard" class="max-w-6xl mx-auto space-y-6">
+        <!-- Section 1: Vibrant Hero Banner -->
+        <div class="cand-hero-banner rounded-3xl p-6 sm:p-8 text-white relative overflow-hidden shadow-2xl space-y-4">
+          <!-- Decorative Glow Orbs -->
+          <div class="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-white/10 blur-2xl pointer-events-none"></div>
+          <div class="absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg-pink-500/20 blur-xl pointer-events-none"></div>
+          
+          <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div class="space-y-2">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md text-xs font-semibold text-purple-100 border border-white/20">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Verified Candidate Dashboard</span>
+              </div>
+              <h2 id="dash-welcome-title" class="text-2xl sm:text-3xl font-black tracking-tight text-white">Welcome to SkillMatch, Candidate!</h2>
+              <p class="text-xs sm:text-sm text-purple-100 max-w-xl leading-relaxed">
+                Objective skill verification, transparent candidate scoring, and merit-first job opportunities.
+              </p>
+            </div>
+            <div class="relative z-10 flex flex-wrap items-center gap-3">
+              <button onclick="app.startAssessmentInstructions()" class="px-5 py-3 rounded-2xl bg-white text-indigo-900 hover:bg-purple-50 font-bold text-xs shadow-lg transition transform hover:-translate-y-0.5 flex items-center gap-2 cursor-pointer">
+                <span>📝 Take Skill Assessment</span>
+              </button>
+              <button onclick="app.setCandidateTab('jobs')" class="px-5 py-3 rounded-2xl bg-white/15 hover:bg-white/25 text-white font-semibold text-xs border border-white/20 backdrop-blur-md transition flex items-center gap-1.5 cursor-pointer">
+                <span>💼 Browse Jobs →</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section: Interview Requests Notification (Task 4) -->
+        <div id="dash-interviews-section" class="hidden p-6 rounded-3xl bg-gradient-to-r from-indigo-950 via-purple-900 to-pink-950 border border-purple-400/50 shadow-2xl space-y-4 text-white">
+          <div class="flex items-center justify-between border-b border-purple-400/30 pb-3">
+            <div class="flex items-center gap-3">
+              <span class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-pink-500 to-purple-600 text-white flex items-center justify-center text-xl shadow-lg shadow-pink-500/30">📅</span>
+              <div>
+                <h3 class="font-bold text-base text-white">Interview Requested by Employer</h3>
+                <p class="text-xs text-purple-200">The recruiter has reviewed your verified application credentials and invited you to an interview.</p>
+              </div>
+            </div>
+            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">Action Required</span>
+          </div>
+          <div id="dash-interviews-content" class="space-y-3">
+            <!-- Dynamically populated by app.js -->
+          </div>
+        </div>
+
+        <!-- Section 2 & 3: Assessment Status & Available Assessment -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Section 2: Assessment Status Card -->
+          <div class="cand-glass-card p-6 rounded-3xl border border-indigo-100 shadow-sm space-y-4 bg-white/90 backdrop-blur-sm">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider font-mono">ASSESSMENT STATUS</span>
+              <span id="dash-assess-status-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200">
+                ⏳ Assessment Not Completed
+              </span>
+            </div>
+            <div>
+              <div id="dash-assess-status-score" class="text-3xl font-black text-slate-900 tracking-tight">
+                Pending Evaluation
+              </div>
+              <p id="dash-assess-status-date" class="text-xs text-slate-500 mt-1 leading-relaxed">
+                Complete your assessment to understand your current skills and job readiness.
+              </p>
+            </div>
+            <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-[11px] text-slate-400 font-mono">Deterministic Evaluation Engine</span>
+              <button id="dash-assess-view-results-btn" onclick="app.setCandidateTab('results')" class="text-xs font-bold text-violet-600 hover:text-violet-800 flex items-center gap-1 hidden cursor-pointer">
+                View Detailed Results →
+              </button>
+            </div>
+          </div>
+
+          <!-- Section 3: Available Assessment Card -->
+          <div class="cand-glass-card p-6 rounded-3xl border border-purple-200/80 shadow-sm space-y-4 bg-gradient-to-br from-purple-50/60 via-white to-indigo-50/40">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-purple-700 uppercase tracking-wider font-mono">AVAILABLE ASSESSMENT</span>
+              <span class="px-3 py-1 rounded-full text-xs font-bold bg-purple-100/70 text-purple-800 border border-purple-200">
+                15 Questions • 5 Topics
+              </span>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-slate-900">SkillMatch Technical Skills Assessment</h3>
+              <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                Standardized MCQs covering Programming Fundamentals, Python, SQL, Problem Solving, and Web Basics. Free back-and-forth palette navigation.
+              </p>
+            </div>
+            <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-[11px] text-slate-500 font-mono">Practice-timed • Single Best Answer</span>
+              <button id="dash-start-assess-btn" onclick="app.startAssessmentInstructions()" class="btn-jewel-primary px-5 py-2.5 rounded-xl font-bold text-xs shadow-md transition flex items-center gap-1.5 cursor-pointer">
+                <span>Start Assessment →</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4: Previous Assessment Results -->
+        <div class="light-card p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3 bg-white">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <div>
+              <h3 class="font-bold text-base text-slate-900">Previous Assessment Summary</h3>
+              <p class="text-xs text-slate-500 mt-0.5">Recorded score, accuracy percentage, and competency area performance.</p>
+            </div>
+            <button onclick="app.startAssessmentInstructions()" class="text-xs font-semibold text-blue-600 hover:text-blue-800">
+              Assessment Guide →
+            </button>
+          </div>
+          <div id="dash-prev-results-content">
+            <!-- Dynamically populated by app.js -->
+          </div>
+        </div>
+
+        <!-- Section 5: Skill Competency Overview -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="font-bold text-base text-slate-900">Skill Competency Overview</h3>
+              <p class="text-xs text-slate-500 mt-0.5">5 core computer science & engineering categories with verified skill levels.</p>
+            </div>
+            <span class="text-xs text-slate-400 font-mono">Dynamic Verification</span>
+          </div>
+          <div id="dash-skills-overview-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <!-- Dynamically populated by app.js -->
+          </div>
+        </div>
+
+        <!-- Section 6: Assessment Guidelines & Summary -->
+        <div class="cand-glass-card p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4 bg-white/90">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <div class="flex items-center gap-2.5">
+              <span class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-violet-600 to-indigo-600 text-white flex items-center justify-center text-sm font-bold shadow-md shadow-violet-600/25">📋</span>
+              <h3 class="font-bold text-base text-slate-900">Assessment Instructions Summary</h3>
+            </div>
+            <button onclick="app.startAssessmentInstructions()" class="text-xs font-bold text-violet-600 hover:text-violet-800 flex items-center gap-1 cursor-pointer">
+              Read Full Guide →
+            </button>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+            <div class="p-4 rounded-2xl bg-gradient-to-br from-indigo-50 to-violet-50/50 border border-indigo-200/80 space-y-1">
+              <span class="font-bold text-indigo-900 block text-xs">15 Questions</span>
+              <p class="text-indigo-800/80 text-[11px] leading-relaxed">3 questions in each of 5 core engineering domains with 4 choices per question.</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-gradient-to-br from-sky-50 to-cyan-50/50 border border-sky-200/80 space-y-1">
+              <span class="font-bold text-sky-900 block text-xs">Palette Navigation</span>
+              <p class="text-sky-800/80 text-[11px] leading-relaxed">Jump to any question freely using the 1-15 numbered palette without losing answers.</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-gradient-to-br from-amber-50 to-yellow-50/50 border border-amber-200/80 space-y-1">
+              <span class="font-bold text-amber-900 block text-xs">Submission Alert</span>
+              <p class="text-amber-800/80 text-[11px] leading-relaxed">Confirmation dialog alerts you if any question is left unanswered before grading.</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-gradient-to-br from-emerald-50 to-teal-50/50 border border-emerald-200/80 space-y-1">
+              <span class="font-bold text-emerald-900 block text-xs">Immediate Grading</span>
+              <p class="text-emerald-800/80 text-[11px] leading-relaxed">Full review screen with question-by-question explanations and performance feedback.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Applications & Quick Recommended Jobs Summary -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-2">
+          <!-- Applications Tracker Overview -->
+          <div class="cand-glass-card p-6 rounded-3xl border border-slate-200 shadow-sm space-y-3 bg-white/90">
+            <div class="flex items-center justify-between">
+              <h4 class="font-bold text-sm text-slate-900">Application Pipeline</h4>
+              <span id="dash-apps-total" class="text-xs font-bold text-violet-600 font-mono">0</span>
+            </div>
+            <div class="grid grid-cols-3 gap-2 text-center text-xs">
+              <div class="bg-gradient-to-br from-emerald-50 to-teal-50 p-2.5 rounded-2xl border border-emerald-200 shadow-xs">
+                <div id="dash-apps-accepted" class="font-black text-emerald-700 text-base">0</div>
+                <div class="text-[10px] text-emerald-700 font-semibold mt-0.5">Accepted</div>
+              </div>
+              <div class="bg-gradient-to-br from-indigo-50 to-purple-50 p-2.5 rounded-2xl border border-indigo-200 shadow-xs">
+                <div id="dash-apps-pending" class="font-black text-indigo-700 text-base">0</div>
+                <div class="text-[10px] text-indigo-700 font-semibold mt-0.5">Pending</div>
+              </div>
+              <div class="bg-gradient-to-br from-rose-50 to-pink-50 p-2.5 rounded-2xl border border-rose-200 shadow-xs">
+                <div id="dash-apps-rejected" class="font-black text-rose-700 text-base">0</div>
+                <div class="text-[10px] text-rose-700 font-semibold mt-0.5">Rejected</div>
+              </div>
+            </div>
+            <button onclick="app.setCandidateTab('applications')" class="w-full text-center text-xs text-violet-700 hover:text-violet-900 font-bold pt-1 cursor-pointer">
+              View All Applications Tracker →
+            </button>
+          </div>
+
+          <!-- Quick Top Recommended Jobs -->
+          <div class="lg:col-span-2 cand-glass-card p-6 rounded-3xl border border-slate-200 shadow-sm space-y-3 bg-white/90">
+            <div class="flex items-center justify-between">
+              <h4 class="font-bold text-sm text-slate-900">Top Recommended Opportunities</h4>
+              <button onclick="app.setCandidateTab('jobs')" class="text-xs font-bold text-violet-700 hover:text-violet-900 cursor-pointer">
+                Browse All Jobs →
+              </button>
+            </div>
+            <div id="dash-quick-jobs" class="space-y-2.5">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUB-TAB: ASSESSMENT INSTRUCTIONS -->
+      <div id="candidate-tab-instructions" class="max-w-4xl mx-auto space-y-6 hidden">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 pb-4">
+          <div>
+            <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight">SkillMatch Technical Skills Assessment</h2>
+            <p class="text-xs text-slate-500 mt-1">Pre-assessment briefing and examination instructions.</p>
+          </div>
+          <button onclick="app.setCandidateTab('dashboard')" class="text-xs font-semibold text-slate-600 hover:text-slate-900 flex items-center gap-1">
+            ← Return to Dashboard
+          </button>
+        </div>
+
+        <div class="cand-glass-card p-6 sm:p-8 rounded-3xl border border-indigo-100 shadow-xl space-y-6 bg-white">
+          <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+            <div>
+              <span class="text-xs font-mono text-violet-600 font-bold uppercase tracking-wider">STANDARDIZED EVALUATION</span>
+              <h3 class="text-lg font-bold text-slate-900 mt-0.5">Examination Overview</h3>
+            </div>
+            <span id="instructions-total-questions" class="px-3.5 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-sm">
+              15 Questions
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <div class="p-4 rounded-2xl bg-gradient-to-br from-violet-50 via-white to-purple-50/50 border border-violet-200/80 text-xs shadow-xs">
+              <span class="font-bold text-violet-950 block mb-1">1. Programming Fundamentals</span>
+              <span class="text-slate-500">OOP concepts, recursion, overriding (3 Questions)</span>
+            </div>
+            <div class="p-4 rounded-2xl bg-gradient-to-br from-emerald-50 via-white to-teal-50/50 border border-emerald-200/80 text-xs shadow-xs">
+              <span class="font-bold text-emerald-950 block mb-1">2. Python Basics</span>
+              <span class="text-slate-500">Data types, list comprehensions, immutability (3 Questions)</span>
+            </div>
+            <div class="p-4 rounded-2xl bg-gradient-to-br from-amber-50 via-white to-yellow-50/50 border border-amber-200/80 text-xs shadow-xs">
+              <span class="font-bold text-amber-950 block mb-1">3. SQL Fundamentals</span>
+              <span class="text-slate-500">Filtering, keys, aggregates, JOINs (3 Questions)</span>
+            </div>
+            <div class="p-4 rounded-2xl bg-gradient-to-br from-rose-50 via-white to-pink-50/50 border border-rose-200/80 text-xs shadow-xs">
+              <span class="font-bold text-rose-950 block mb-1">4. Problem Solving</span>
+              <span class="text-slate-500">Time complexity, Big-O, data structures (3 Questions)</span>
+            </div>
+            <div class="p-4 rounded-2xl bg-gradient-to-br from-cyan-50 via-white to-sky-50/50 border border-cyan-200/80 text-xs shadow-xs">
+              <span class="font-bold text-cyan-950 block mb-1">5. Web Development Basics</span>
+              <span class="text-slate-500">HTML structure, CSS box model, DOM events (3 Questions)</span>
+            </div>
+            <div class="p-4 rounded-2xl bg-gradient-to-br from-purple-100 via-indigo-50 to-pink-50 border border-purple-200 text-xs shadow-xs">
+              <span class="font-bold text-purple-950 block mb-1">Evaluation & Scoring</span>
+              <span class="text-purple-700">Immediate deterministic grading with explanations</span>
+            </div>
+          </div>
+
+          <div class="space-y-3 text-xs text-slate-700">
+            <h4 class="font-bold text-sm text-slate-900">Key Rules & Guidelines:</h4>
+            <ul class="space-y-2 list-disc list-inside text-slate-600 leading-relaxed">
+              <li>Each question is multiple-choice with <strong>4 answer options</strong> and exactly one correct answer.</li>
+              <li>You can freely navigate between questions using the <strong>Previous / Next</strong> buttons or the <strong>Question Palette (1-15)</strong>.</li>
+              <li>Your selected answers are <strong>automatically saved</strong> as you move between questions.</li>
+              <li>You can change your selected answer at any time before clicking final submission.</li>
+              <li>A confirmation dialog will show how many questions you have answered before submitting.</li>
+              <li>Unanswered questions will be evaluated as 0 points.</li>
+            </ul>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-gradient-to-r from-violet-50 via-indigo-50 to-purple-50 border border-indigo-200/80 text-xs text-slate-700 flex items-center gap-3">
+            <span class="text-2xl">🛡️</span>
+            <div>
+              <strong class="text-indigo-950 font-bold">Zero Demographic Bias:</strong> Assessment scores are computed solely from technical accuracy and directly verify your skill levels.
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-slate-100">
+            <button onclick="app.setCandidateTab('dashboard')" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs transition">
+              ← Back to Dashboard
+            </button>
+            <button onclick="app.startAssessmentQuiz()" class="w-full sm:w-auto px-8 py-3 rounded-xl btn-jewel-primary font-bold text-xs shadow-lg transition flex items-center justify-center gap-2">
+              <span>Begin Assessment Now →</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUB-TAB: CANDIDATE QUIZ WORKFLOW -->
+      <div id="candidate-tab-assessments" class="max-w-4xl mx-auto space-y-6 hidden">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 pb-4">
+          <div>
+            <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight">SkillMatch Technical Skills Assessment</h2>
+            <p class="text-xs text-slate-500 mt-1">Answer each question carefully. You can jump to any question using the palette below.</p>
+          </div>
+          <button onclick="app.confirmSubmitAssessment()" class="px-5 py-2.5 btn-jewel-emerald font-bold text-xs rounded-xl shadow-md transition flex items-center gap-1.5">
+            <span>✓ Finish & Submit</span>
+          </button>
+        </div>
+
+        <!-- Quiz Main Card -->
+        <div class="cand-glass-card p-6 sm:p-8 rounded-3xl border border-indigo-100 shadow-xl space-y-6 bg-white">
+          <!-- Top Status Bar -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+            <div class="flex items-center gap-3">
+              <span id="quiz-q-category" class="cand-tag-violet px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider font-mono">Programming Fundamentals</span>
+              <span id="quiz-q-difficulty" class="text-[11px] px-2.5 py-0.5 rounded-full font-semibold border bg-emerald-50 text-emerald-700 border-emerald-200">Easy</span>
+            </div>
+            <div class="flex items-center gap-4 text-xs">
+              <span id="quiz-q-num" class="font-bold text-slate-800">Question 1 of 15</span>
+              <span class="text-slate-300">•</span>
+              <span id="quiz-answered-count" class="font-mono text-violet-700 font-bold bg-violet-50 px-2.5 py-1 rounded-lg border border-violet-100">0 of 15 Answered</span>
+            </div>
+          </div>
+
+          <!-- Question Statement -->
+          <div class="py-2">
+            <p id="quiz-q-text" class="text-base sm:text-lg font-bold text-slate-900 leading-relaxed min-h-[50px]">
+              Loading question...
+            </p>
+          </div>
+
+          <!-- Options Container (A, B, C, D) -->
+          <div id="quiz-options-container" class="space-y-3">
+            <!-- Dynamically populated with .quiz-option-card -->
+          </div>
+
+          <!-- Question Palette (1 to 15) -->
+          <div class="pt-4 border-t border-slate-100 space-y-2.5">
+            <div class="flex items-center justify-between text-xs">
+              <span class="font-bold text-slate-800">Question Palette (Jump to question):</span>
+              <div class="flex items-center gap-3 text-[11px] text-slate-500">
+                <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-md ring-2 ring-violet-500 bg-white inline-block"></span> Current</span>
+                <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-md bg-gradient-to-r from-emerald-500 to-teal-600 inline-block"></span> Answered</span>
+                <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-md bg-slate-100 border border-slate-200 inline-block"></span> Unanswered</span>
+              </div>
+            </div>
+            <div id="quiz-palette-container" class="flex flex-wrap gap-2 pt-1">
+              <!-- Dynamically populated (15 buttons) -->
+            </div>
+          </div>
+
+          <!-- Navigation Controls -->
+          <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+            <button id="quiz-prev-btn" onclick="app.prevQuestion()" class="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold disabled:opacity-40 disabled:cursor-not-allowed transition">
+              ← Previous
+            </button>
+            <div class="flex items-center gap-3">
+              <button id="quiz-next-btn" onclick="app.nextQuestion()" class="px-6 py-2.5 rounded-xl btn-jewel-primary text-xs font-bold shadow-md transition">
+                Next Question →
+              </button>
+              <button id="quiz-submit-btn" onclick="app.confirmSubmitAssessment()" class="px-6 py-2.5 rounded-xl btn-jewel-emerald text-xs font-bold shadow-md transition">
+                ✓ Submit Assessment
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUB-TAB: ASSESSMENT RESULTS -->
+      <div id="candidate-tab-results" class="max-w-4xl mx-auto space-y-6 hidden">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 pb-4">
+          <div>
+            <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight">Technical Assessment Results</h2>
+            <p class="text-xs text-slate-500 mt-1">Standardized objective evaluation report and question breakdown.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="app.setCandidateTab('dashboard')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs rounded-xl transition">
+              ← Return to Dashboard
+            </button>
+            <button onclick="app.retakeAssessment()" class="px-4 py-2 btn-jewel-primary font-bold text-xs rounded-xl shadow-md transition">
+              ↺ Retake Assessment
+            </button>
+          </div>
+        </div>
+
+        <!-- Main Score Hero Card -->
+        <div class="cand-glass-card p-6 sm:p-8 rounded-3xl border border-indigo-100 shadow-xl bg-gradient-to-br from-white via-indigo-50/30 to-purple-50/40 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-200 mb-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span>✓ Verified Objective Evaluation</span>
+            </div>
+            <h3 class="text-2xl font-black text-slate-900 tracking-tight">SkillMatch Assessment Score</h3>
+            <p id="result-date-val" class="text-xs font-mono text-slate-500 mt-1">Completed on ...</p>
+            <p class="text-xs text-slate-600 mt-2 max-w-md leading-relaxed">
+              Your score has been computed deterministically across 5 engineering domains and recorded to your candidate profile.
+            </p>
+          </div>
+
+          <div class="text-center bg-white/95 backdrop-blur p-6 rounded-3xl border border-indigo-100 shadow-lg min-w-[210px]">
+            <span class="text-xs font-mono text-violet-600 font-bold uppercase tracking-wider block">FINAL GRADE</span>
+            <div id="result-score-val" class="text-4xl sm:text-5xl font-black text-gradient-purple mt-1">
+              0 / 15
+            </div>
+            <div id="result-percent-val" class="text-sm font-bold text-slate-700 mt-1">
+              0% Accuracy
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Summary Stat Cards -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div class="cand-glass-card p-4 rounded-2xl border border-indigo-100 text-center bg-white shadow-xs">
+            <span class="text-[11px] font-mono text-indigo-600 font-semibold uppercase tracking-wider block">Total Questions</span>
+            <span id="result-total-q" class="text-2xl font-black text-slate-900 mt-1 block">15</span>
+          </div>
+          <div class="cand-glass-card p-4 rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-teal-50 text-center shadow-xs">
+            <span class="text-[11px] font-mono text-emerald-700 font-semibold uppercase tracking-wider block">Correct</span>
+            <span id="result-correct-count" class="text-2xl font-black text-emerald-700 mt-1 block">0</span>
+          </div>
+          <div class="cand-glass-card p-4 rounded-2xl border border-rose-200 bg-gradient-to-br from-rose-50 to-pink-50 text-center shadow-xs">
+            <span class="text-[11px] font-mono text-rose-700 font-semibold uppercase tracking-wider block">Incorrect</span>
+            <span id="result-incorrect-count" class="text-2xl font-black text-rose-700 mt-1 block">0</span>
+          </div>
+          <div class="cand-glass-card p-4 rounded-2xl border border-slate-200 text-center bg-white shadow-xs">
+            <span class="text-[11px] font-mono text-slate-500 font-semibold uppercase tracking-wider block">Unanswered</span>
+            <span id="result-unanswered-count" class="text-2xl font-black text-slate-600 mt-1 block">0</span>
+          </div>
+        </div>
+
+        <!-- Category Competency Performance -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <h3 class="font-bold text-base text-slate-900">Performance by Category (5 Competency Areas)</h3>
+            <span class="text-xs text-slate-500 font-mono">3 Questions Per Category</span>
+          </div>
+          <div id="result-categories-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Question-by-Question Review with Explanations -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+            <h3 class="font-bold text-base text-slate-900">Question-by-Question Review & Explanations</h3>
+            <span class="text-xs text-slate-500 font-mono">15 Detailed Reviews</span>
+          </div>
+          <div id="result-review-container" class="space-y-4">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Action Footer -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-slate-200">
+          <button onclick="app.setCandidateTab('dashboard')" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs transition">
+            ← Return to Candidate Dashboard
+          </button>
+          <button onclick="app.retakeAssessment()" class="w-full sm:w-auto px-6 py-3 rounded-xl btn-jewel-primary font-bold text-xs shadow-lg transition">
+            ↺ Retake Assessment
+          </button>
+        </div>
+      </div>
+
+      <!-- SUB-TAB: CANDIDATE PROFILE -->
+      <div id="candidate-tab-profile" class="max-w-4xl mx-auto space-y-6 hidden">
+        <div>
+          <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight">Candidate Profile & Academic Portfolio</h2>
+          <p class="text-xs text-slate-500 mt-1">Keep your qualifications updated to optimize your rule-based FairHire score.</p>
+        </div>
+
+        <form id="candidate-profile-form" class="space-y-6">
+          <!-- Academic Information Card -->
+          <div class="cand-glass-card p-6 sm:p-8 rounded-3xl border border-indigo-100 shadow-xl bg-white space-y-4">
+            <h3 class="font-bold text-base text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2.5">
+              <span class="w-8 h-8 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-base border border-indigo-100">📚</span> 
+              <span>Academic Performance</span>
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">10th Percentage (%)</label>
+                <input type="number" id="prof-tenth" step="0.1" min="0" max="100" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50/50 border border-slate-300 text-slate-900 text-sm focus:border-violet-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-violet-200 transition shadow-xs" required>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">12th Percentage (%)</label>
+                <input type="number" id="prof-twelfth" step="0.1" min="0" max="100" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50/50 border border-slate-300 text-slate-900 text-sm focus:border-violet-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-violet-200 transition shadow-xs" required>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Current CGPA (out of 10)</label>
+                <input type="number" id="prof-cgpa" step="0.01" min="0" max="10" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50/50 border border-slate-300 text-slate-900 text-sm focus:border-violet-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-violet-200 transition shadow-xs" required>
+              </div>
+            </div>
+            <div class="text-xs text-indigo-950 bg-indigo-50/70 p-3 rounded-xl border border-indigo-200 flex items-center gap-2">
+              <span class="text-indigo-600 text-base">ℹ️</span>
+              <div><strong class="text-indigo-900">Semester Aggregate:</strong> Sem 1 (8.2), Sem 2 (8.4), Sem 3 (8.6), Sem 4 (8.5), Sem 5 (8.7), Sem 6 (8.6). Verified via university registry.</div>
+            </div>
+          </div>
+
+          <!-- Technical Skills Card -->
+          <div class="cand-glass-card p-6 sm:p-8 rounded-3xl border border-purple-100 shadow-xl bg-white space-y-4">
+            <h3 class="font-bold text-base text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2.5">
+              <span class="w-8 h-8 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center font-bold text-base border border-purple-100">💻</span> 
+              <span>Technical Skills</span>
+            </h3>
+            
+            <!-- Skill Tags Container -->
+            <div id="profile-skills-tags" class="flex flex-wrap gap-2 pt-1"></div>
+
+            <!-- Add Skill Form -->
+            <div class="pt-3 flex flex-wrap items-center gap-2 border-t border-slate-100">
+              <input type="text" id="new-skill-name" placeholder="Skill name (e.g. Docker, TypeScript)" class="flex-1 min-w-[200px] px-3.5 py-2.5 rounded-xl bg-slate-50/50 border border-slate-300 text-slate-900 text-xs focus:border-purple-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-purple-200 transition shadow-xs">
+              <select id="new-skill-level" class="px-3.5 py-2.5 rounded-xl bg-slate-50/50 border border-slate-300 text-slate-900 text-xs focus:border-purple-500 focus:bg-white focus:outline-none shadow-xs font-semibold">
+                <option value="Beginner">Beginner (1 pt)</option>
+                <option value="Intermediate" selected>Intermediate (2 pts)</option>
+                <option value="Advanced">Advanced (3 pts)</option>
+              </select>
+              <button type="button" id="add-skill-btn" class="px-5 py-2.5 btn-jewel-primary text-white text-xs font-bold rounded-xl transition shadow-md">
+                + Add Skill
+              </button>
+            </div>
+          </div>
+
+          <!-- Certifications Card -->
+          <div class="cand-glass-card p-6 sm:p-8 rounded-3xl border border-emerald-100 shadow-xl bg-white space-y-4">
+            <h3 class="font-bold text-base text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2.5">
+              <span class="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-base border border-emerald-100">📜</span> 
+              <span>Certifications</span>
+            </h3>
+            <div id="profile-certs-container" class="space-y-2"></div>
+            
+            <div class="pt-2 flex flex-wrap items-center gap-2 border-t border-slate-100">
+              <input type="text" id="new-cert-title" placeholder="Certification title (e.g. AWS Certified Developer)" class="flex-1 min-w-[200px] px-3.5 py-2.5 rounded-xl bg-slate-50/50 border border-slate-300 text-slate-900 text-xs focus:border-emerald-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-200 transition shadow-xs">
+              <input type="text" id="new-cert-issuer" placeholder="Issuer (e.g. AWS, Coursera, NPTEL)" class="px-3.5 py-2.5 rounded-xl bg-slate-50/50 border border-slate-300 text-slate-900 text-xs focus:border-emerald-500 focus:bg-white focus:outline-none shadow-xs">
+              <button type="button" id="add-cert-btn" class="px-5 py-2.5 btn-jewel-emerald text-white text-xs font-bold rounded-xl transition shadow-md">
+                + Add Cert
+              </button>
+            </div>
+          </div>
+
+          <!-- Practical Projects Card -->
+          <div class="cand-glass-card p-6 sm:p-8 rounded-3xl border border-amber-100 shadow-xl bg-white space-y-4">
+            <h3 class="font-bold text-base text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2.5">
+              <span class="w-8 h-8 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-base border border-amber-100">🚀</span> 
+              <span>Practical Projects</span>
+            </h3>
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Project Title</label>
+              <input type="text" id="prof-proj-title" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50/50 border border-slate-300 text-slate-900 text-sm focus:border-amber-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-200 transition shadow-xs" required>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Description</label>
+              <textarea id="prof-proj-desc" rows="2" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50/50 border border-slate-300 text-slate-900 text-sm focus:border-amber-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-200 transition shadow-xs" required></textarea>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Technologies Used (comma-separated)</label>
+                <input type="text" id="prof-proj-tech" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50/50 border border-slate-300 text-slate-900 text-sm focus:border-amber-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-200 transition shadow-xs" required>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">GitHub / Project Repository URL</label>
+                <input type="url" id="prof-proj-url" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50/50 border border-slate-300 text-slate-900 text-sm focus:border-amber-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-200 transition shadow-xs">
+              </div>
+            </div>
+          </div>
+
+          <!-- Experience Card -->
+          <div class="cand-glass-card p-6 sm:p-8 rounded-3xl border border-cyan-100 shadow-xl bg-white space-y-4">
+            <h3 class="font-bold text-base text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2.5">
+              <span class="w-8 h-8 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center font-bold text-base border border-cyan-100">💼</span> 
+              <span>Internship Experience (Optional)</span>
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Role</label>
+                <input type="text" id="prof-exp-role" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50/50 border border-slate-300 text-slate-900 text-sm focus:border-cyan-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-cyan-200 transition shadow-xs">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Company / Organization</label>
+                <input type="text" id="prof-exp-company" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50/50 border border-slate-300 text-slate-900 text-sm focus:border-cyan-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-cyan-200 transition shadow-xs">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Duration</label>
+                <input type="text" id="prof-exp-duration" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50/50 border border-slate-300 text-slate-900 text-sm focus:border-cyan-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-cyan-200 transition shadow-xs">
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Summary of Contributions</label>
+              <input type="text" id="prof-exp-desc" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50/50 border border-slate-300 text-slate-900 text-sm focus:border-cyan-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-cyan-200 transition shadow-xs">
+            </div>
+          </div>
+
+          <!-- Save Button -->
+          <div class="flex items-center justify-end gap-3 pt-2">
+            <button type="submit" class="px-8 py-3.5 btn-jewel-primary text-white font-extrabold text-sm rounded-2xl shadow-xl transition flex items-center gap-2">
+              <span>💾</span>
+              <span>Save Profile & Recalculate Score</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- SUB-TAB: SkillMatch MERIT SCORE -->
+      <div id="candidate-tab-score" class="max-w-4xl mx-auto space-y-6 hidden">
+        <div>
+          <h2 class="text-2xl font-extrabold text-white tracking-tight">Transparent SkillMatch Score</h2>
+          <p class="text-xs text-slate-300 mt-1">Rule-based scoring breakdown. Zero black-box bias.</p>
+        </div>
+
+        <!-- Animated Gauge Card -->
+        <div class="cand-glass-card p-8 rounded-3xl border border-indigo-500/30 shadow-xl bg-slate-900/95 flex flex-col md:flex-row items-center justify-around gap-8 text-center md:text-left">
+          <div class="relative w-44 h-44 flex items-center justify-center shrink-0">
+            <svg class="w-44 h-44 score-circle-svg" viewBox="0 0 140 140">
+              <defs>
+                <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#8b5cf6" />
+                  <stop offset="50%" stop-color="#6366f1" />
+                  <stop offset="100%" stop-color="#ec4899" />
+                </linearGradient>
+              </defs>
+              <circle class="score-circle-bg" cx="70" cy="70" r="58"></circle>
+              <circle id="score-gauge-bar" class="score-circle-bar" cx="70" cy="70" r="58" stroke-dasharray="364.4 364.4" stroke-dashoffset="58"></circle>
+            </svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center">
+              <span id="score-total-display" class="text-4xl font-black text-white tracking-tight drop-shadow-md">42</span>
+              <span class="text-[11px] text-purple-300 uppercase tracking-widest font-mono font-bold">/ 50 Max</span>
+            </div>
+          </div>
+
+          <div class="max-w-md">
+            <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold border border-emerald-400/40 mb-3">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>Verified Rule-Based Qualification</span>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-black text-white tracking-tight">Competitive Candidate Standing</h3>
+            <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+              Your SkillMatch Score combines academic consistency, depth of technical skills, accredited certifications, and project artifacts into an objective, standardized metric.
+            </p>
+          </div>
+        </div>
+
+        <!-- 4 Pillar Breakdown Cards with "Why?" explanations -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Academic -->
+          <div class="cand-glass-card pillar-card-academic p-6 rounded-3xl border border-sky-500/35 shadow-md space-y-3.5 transition-all duration-300">
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-sky-500/20 text-sky-400 border border-sky-400/40 uppercase tracking-wider">PILLAR 1</span>
+                <h4 class="font-extrabold text-white text-base mt-1.5 pillar-title">Academic Performance</h4>
+              </div>
+              <span id="score-academic-val" class="font-black text-2xl text-sky-400 drop-shadow-sm">17 / 20</span>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed pillar-desc">Evaluates 10th, 12th, and ongoing university CGPA persistence.</p>
+            <button type="button" class="why-link-academic text-xs text-sky-400 hover:text-sky-300 font-bold flex items-center gap-1.5 cursor-pointer transition hover:underline" onclick="app.toggleWhyExplanation('why-academic-box')">
+              <span>💡</span>
+              <span id="why-academic-btn-text">Why 17/20?</span>
+              <span class="text-[10px] text-sky-400/80">↓</span>
+            </button>
+            <div id="why-academic-box" class="hidden p-4 rounded-2xl bg-sky-950/80 border border-sky-400/50 text-xs text-sky-100 shadow-inner leading-relaxed">
+              <p id="why-academic-text" class="text-sky-100 font-medium"></p>
+            </div>
+          </div>
+
+          <!-- Technical -->
+          <div class="cand-glass-card pillar-card-technical p-6 rounded-3xl border border-purple-500/35 shadow-md space-y-3.5 transition-all duration-300">
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-400/40 uppercase tracking-wider">PILLAR 2</span>
+                <h4 class="font-extrabold text-white text-base mt-1.5 pillar-title">Technical Skills</h4>
+              </div>
+              <span id="score-technical-val" class="font-black text-2xl text-purple-300 drop-shadow-sm">17 / 20</span>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed pillar-desc">Considers proficiency breadth and weighted skill levels.</p>
+            <button type="button" class="why-link-technical text-xs text-purple-300 hover:text-purple-200 font-bold flex items-center gap-1.5 cursor-pointer transition hover:underline" onclick="app.toggleWhyExplanation('why-technical-box')">
+              <span>💡</span>
+              <span id="why-technical-btn-text">Why 17/20?</span>
+              <span class="text-[10px] text-purple-300/80">↓</span>
+            </button>
+            <div id="why-technical-box" class="hidden p-4 rounded-2xl bg-purple-950/80 border border-purple-400/50 text-xs text-purple-100 shadow-inner leading-relaxed">
+              <p id="why-technical-text" class="text-purple-100 font-medium"></p>
+            </div>
+          </div>
+
+          <!-- Certifications -->
+          <div class="cand-glass-card pillar-card-certs p-6 rounded-3xl border border-emerald-500/35 shadow-md space-y-3.5 transition-all duration-300">
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-400/40 uppercase tracking-wider">PILLAR 3</span>
+                <h4 class="font-extrabold text-white text-base mt-1.5 pillar-title">Certifications</h4>
+              </div>
+              <span id="score-certs-val" class="font-black text-2xl text-emerald-400 drop-shadow-sm">4 / 5</span>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed pillar-desc">Technical certifications from accredited organizations.</p>
+            <button type="button" class="why-link-certs text-xs text-emerald-400 hover:text-emerald-300 font-bold flex items-center gap-1.5 cursor-pointer transition hover:underline" onclick="app.toggleWhyExplanation('why-certs-box')">
+              <span>💡</span>
+              <span id="why-certs-btn-text">Why 4/5?</span>
+              <span class="text-[10px] text-emerald-400/80">↓</span>
+            </button>
+            <div id="why-certs-box" class="hidden p-4 rounded-2xl bg-emerald-950/80 border border-emerald-400/50 text-xs text-emerald-100 shadow-inner leading-relaxed">
+              <p id="why-certs-text" class="text-emerald-100 font-medium"></p>
+            </div>
+          </div>
+
+          <!-- Projects -->
+          <div class="cand-glass-card pillar-card-projects p-6 rounded-3xl border border-amber-500/35 shadow-md space-y-3.5 transition-all duration-300">
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-400/40 uppercase tracking-wider">PILLAR 4</span>
+                <h4 class="font-extrabold text-white text-base mt-1.5 pillar-title">Practical Projects</h4>
+              </div>
+              <span id="score-projects-val" class="font-black text-2xl text-amber-400 drop-shadow-sm">4 / 5</span>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed pillar-desc">Real-world applications with public source code verification.</p>
+            <button type="button" class="why-link-projects text-xs text-amber-400 hover:text-amber-300 font-bold flex items-center gap-1.5 cursor-pointer transition hover:underline" onclick="app.toggleWhyExplanation('why-projects-box')">
+              <span>💡</span>
+              <span id="why-projects-btn-text">Why 4/5?</span>
+              <span class="text-[10px] text-amber-400/80">↓</span>
+            </button>
+            <div id="why-projects-box" class="hidden p-4 rounded-2xl bg-amber-950/80 border border-amber-400/50 text-xs text-amber-100 shadow-inner leading-relaxed">
+              <p id="why-projects-text" class="text-amber-100 font-medium"></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-700/60 text-xs text-slate-300 shadow-sm">
+          <strong class="text-white">Important Rule of Fair Hiring:</strong> Scoring is 100% deterministic and auditable. We do not use hidden black-box neural networks to rank candidates.
+        </div>
+      </div>
+
+      <!-- SUB-TAB: AVAILABLE JOBS -->
+      <div id="candidate-tab-jobs" class="max-w-5xl mx-auto space-y-6 hidden">
+        <div>
+          <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight">Recommended Opportunities & Job Matches</h2>
+          <p class="text-xs text-slate-500 mt-1">Jobs matched against your verified FairHire score and skill portfolio.</p>
+        </div>
+
+        <!-- Available Jobs Grid -->
+        <div id="available-jobs-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+      </div>
+
+      <!-- SUB-TAB: MY APPLICATIONS -->
+      <div id="candidate-tab-applications" class="max-w-4xl mx-auto space-y-6 hidden">
+        <div>
+          <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight">My Applications Tracker</h2>
+          <p class="text-xs text-slate-500 mt-1">Real-time status updates and transparent feedback from recruiters.</p>
+        </div>
+
+        <div id="my-applications-list" class="space-y-4"></div>
+      </div>
+
+      <!-- SUB-TAB: SKILL GAP ANALYZER -->
+      <div id="candidate-tab-skillgap" class="max-w-4xl mx-auto space-y-6 hidden">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight">Skill Gap Analyzer & Learning Roadmap</h2>
+            <p class="text-xs text-slate-500 mt-1">Benchmark your profile against target roles and follow structured learning steps.</p>
+          </div>
+          <!-- Role selector -->
+          <div class="flex items-center gap-2 text-xs">
+            <span class="text-slate-500 font-medium">Target Role:</span>
+            <select onchange="app.setSkillGapRole(this.value)" class="bg-white border border-slate-300 text-slate-900 px-3 py-1.5 rounded-xl text-xs font-semibold focus:outline-none shadow-sm">
+              <option value="Software Developer">Software Developer</option>
+              <option value="Cloud Engineer">Cloud Engineer (AWS)</option>
+              <option value="Data Analyst">Data Analyst</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Analysis Overview Card -->
+        <div class="cand-glass-card p-6 sm:p-8 rounded-3xl border border-indigo-100 shadow-xl bg-white space-y-5">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <h3 class="font-bold text-slate-900 text-base">Profile Gap Audit for <span id="gap-role-display" class="text-violet-700 font-extrabold">Software Developer</span></h3>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Candidate Matches -->
+            <div class="p-4 rounded-2xl bg-gradient-to-br from-emerald-50 to-teal-50/50 border border-emerald-200/80 space-y-2">
+              <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-800">Your Verified Matches:</h4>
+              <div id="gap-cand-skills" class="flex flex-wrap gap-1.5 pt-1"></div>
+            </div>
+
+            <!-- Missing Skills -->
+            <div class="p-4 rounded-2xl bg-gradient-to-br from-amber-50 to-yellow-50/50 border border-amber-200/80 space-y-2">
+              <h4 class="text-xs font-bold uppercase tracking-wider text-amber-800">Skill Gaps To Address:</h4>
+              <div id="gap-missing-skills" class="flex flex-wrap gap-1.5 pt-1"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step-by-Step Learning Path -->
+        <div class="space-y-3">
+          <h3 class="font-bold text-base text-slate-900">Personalized Learning Roadmap</h3>
+          <div id="gap-learning-path" class="space-y-3"></div>
+        </div>
+      </div>
+
+      <!-- SUB-TAB: TRANSPARENCY -->
+      <div id="candidate-tab-transparency" class="max-w-4xl mx-auto space-y-6 hidden">
+        <div>
+          <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight">SkillMatch Transparency Manifesto</h2>
+          <p class="text-xs text-slate-500 mt-1">Our ethical commitment to structured, job-related hiring.</p>
+        </div>
+
+        <div class="cand-glass-card p-8 rounded-3xl border border-indigo-100 shadow-xl bg-white space-y-6">
+          <div class="p-5 rounded-2xl bg-gradient-to-br from-rose-50 to-pink-50 border border-rose-200 shadow-xs">
+            <h3 class="text-sm font-bold text-rose-800 uppercase tracking-wider mb-2">🚫 What SkillMatch NEVER Uses</h3>
+            <p class="text-xs text-slate-700 leading-relaxed">
+              We completely strip and ignore demographic, social, and non-job-related attributes:
+            </p>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-3 text-xs font-mono text-slate-800">
+              <span class="p-2.5 bg-white/90 rounded-xl border border-rose-200/80 font-bold text-rose-950 shadow-xs">✕ Gender</span>
+              <span class="p-2.5 bg-white/90 rounded-xl border border-rose-200/80 font-bold text-rose-950 shadow-xs">✕ Religion</span>
+              <span class="p-2.5 bg-white/90 rounded-xl border border-rose-200/80 font-bold text-rose-950 shadow-xs">✕ Caste</span>
+              <span class="p-2.5 bg-white/90 rounded-xl border border-rose-200/80 font-bold text-rose-950 shadow-xs">✕ Photographs</span>
+              <span class="p-2.5 bg-white/90 rounded-xl border border-rose-200/80 font-bold text-rose-950 shadow-xs">✕ Family Background</span>
+              <span class="p-2.5 bg-white/90 rounded-xl border border-rose-200/80 font-bold text-rose-950 shadow-xs">✕ Politics</span>
+              <span class="p-2.5 bg-white/90 rounded-xl border border-rose-200/80 font-bold text-rose-950 shadow-xs">✕ Personal Ties</span>
+              <span class="p-2.5 bg-white/90 rounded-xl border border-rose-200/80 font-bold text-rose-950 shadow-xs">✕ Zip Code Bias</span>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200 shadow-xs">
+            <h3 class="text-sm font-bold text-emerald-900 uppercase tracking-wider mb-2">✓ The 6 Verified Merit Pillars</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3 text-xs text-slate-800">
+              <div class="p-3.5 bg-white/90 rounded-xl border border-emerald-200/80 shadow-xs">
+                <strong class="text-emerald-950">1. Academic Performance:</strong> Documented persistence across 10th, 12th, and ongoing degree semesters.
+              </div>
+              <div class="p-3.5 bg-white/90 rounded-xl border border-emerald-200/80 shadow-xs">
+                <strong class="text-emerald-950">2. Technical Skills:</strong> Hands-on proficiency verified via assessments and project demonstration.
+              </div>
+              <div class="p-3.5 bg-white/90 rounded-xl border border-emerald-200/80 shadow-xs">
+                <strong class="text-emerald-950">3. Assessments:</strong> Standardized code comprehension and algorithmic logic tests.
+              </div>
+              <div class="p-3.5 bg-white/90 rounded-xl border border-emerald-200/80 shadow-xs">
+                <strong class="text-emerald-950">4. Certifications:</strong> Recognized credentials from verified institutions (NPTEL, Coursera, Oracle).
+              </div>
+              <div class="p-3.5 bg-white/90 rounded-xl border border-emerald-200/80 shadow-xs">
+                <strong class="text-emerald-950">5. Practical Projects:</strong> Real-world applications with inspectable public Git repositories.
+              </div>
+              <div class="p-3.5 bg-white/90 rounded-xl border border-emerald-200/80 shadow-xs">
+                <strong class="text-emerald-950">6. Relevant Experience:</strong> Practical internships and documented hands-on industry apprenticeships.
+              </div>
+            </div>
+          </div>
+
+          <div class="text-xs text-slate-500">
+            <strong class="text-slate-900">Human Oversight:</strong> SkillMatch empowers recruiters with objective verification, but all final hiring offers remain with authorized human talent leaders.
+          </div>
+        </div>
+      </div>
+    </section>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- 3. HR PORTAL VIEW (Clean, Professional Enterprise Executive Style) -->
+  <!-- ========================================================= -->
+  <div id="view-hr" class="flex-1 flex flex-col md:flex-row hidden bg-slate-50 text-slate-800">
+    <!-- HR Recruiter Access Gate (If not entered) -->
+    <div id="hr-auth-gate" class="flex-1 flex items-center justify-center p-6 bg-slate-100/50">
+      <div class="light-card max-w-lg w-full p-8 sm:p-10 rounded-3xl border border-slate-200 shadow-xl space-y-6 bg-white">
+        <div class="text-center">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-slate-900 via-indigo-950 to-purple-950 border border-amber-400/40 p-2 flex items-center justify-center mx-auto mb-4 shadow-sm">
+            <img src="assets/balance_scale.svg" alt="SkillMatch Balance Scale Logo" class="w-full h-full object-contain filter drop-shadow">
+          </div>
+          <div class="text-xs font-mono text-blue-600 font-bold uppercase tracking-widest mb-1">SkillMatch Enterprise</div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Recruiter Workspace</h2>
+          <p class="text-xs sm:text-sm text-slate-500 mt-2 leading-relaxed">
+            Review candidates, manage job requirements, and make transparent hiring decisions based on verified merit.
+          </p>
+        </div>
+
+        <!-- Details Card -->
+        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 text-xs space-y-3">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-200">
+            <span class="text-slate-500">Organization:</span>
+            <span class="font-bold text-slate-900 text-right">SkillMatch Campus Hiring Consortium</span>
+          </div>
+          <div class="flex items-center justify-between pb-2 border-b border-slate-200">
+            <span class="text-slate-500">Role:</span>
+            <span class="font-semibold text-blue-700 text-right">Recruiter / Talent Lead</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-slate-500">Access Mode:</span>
+            <span class="font-mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 text-[11px] font-semibold">Corporate Recruiter</span>
+          </div>
+        </div>
+
+        <!-- Live Server Status Indicator in Gate -->
+        <div class="flex justify-center">
+          <div class="backend-status-badge"></div>
+        </div>
+
+        <!-- Main Action Button -->
+        <button type="button" id="enter-recruiter-workspace-btn" onclick="app.enterRecruiterWorkspace()" class="w-full py-3.5 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-md hover:shadow-lg transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+          <span>Enter Recruiter Workspace →</span>
+        </button>
+
+        <div class="text-center pt-1">
+          <button type="button" onclick="app.setRole('landing')" class="text-xs text-slate-500 hover:text-slate-900 transition">
+            ← Back to Landing Page
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- HR Authenticated Dashboard Content -->
+    <div id="hr-auth-dashboard" class="flex-1 flex flex-col md:flex-row hidden">
+      <!-- HR Sidebar -->
+      <aside class="w-full md:w-64 bg-white border-r border-slate-200 p-5 flex flex-col justify-between shrink-0 shadow-xs">
+        <div>
+          <!-- Recruiter Access Indicator Header -->
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 mb-6">
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="text-[10px] font-mono text-blue-700 font-bold uppercase tracking-wider">Recruiter Workspace</span>
+              <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-blue-100 text-blue-800 border border-blue-200">Active</span>
+            </div>
+            <h4 class="font-bold text-sm text-slate-900 truncate">SkillMatch Talent Acquisition</h4>
+            <p class="text-[11px] text-slate-500">Recruiter / Hiring Lead</p>
+          </div>
+
+          <!-- HR Nav Links (8 Tabs) -->
+          <nav class="space-y-1 text-xs font-medium">
+            <a href="#" data-tab="dashboard" class="hr-nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-slate-700 hover:bg-slate-100">
+              <span>📊</span> Dashboard
+            </a>
+            <a href="#" data-tab="jobs" class="hr-nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-slate-700 hover:bg-slate-100">
+              <span>💼</span> Jobs
+            </a>
+            <a href="#" data-tab="applicants" class="hr-nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-slate-700 hover:bg-slate-100">
+              <span>👥</span> Applicants
+            </a>
+            <a href="#" data-tab="evaluation" class="hr-nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-slate-700 hover:bg-slate-100">
+              <span>⚖️</span> Candidate Evaluation
+            </a>
+            <a href="#" data-tab="assessments" class="hr-nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-slate-700 hover:bg-slate-100">
+              <span>📝</span> Assessments
+            </a>
+            <a href="#" data-tab="interviews" class="hr-nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-slate-700 hover:bg-slate-100">
+              <span>📅</span> Interviews
+            </a>
+            <a href="#" data-tab="notifications" class="hr-nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-slate-700 hover:bg-slate-100">
+              <span>🔔</span> Notifications
+            </a>
+            <a href="#" data-tab="audithistory" class="hr-nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-slate-700 hover:bg-slate-100">
+              <span>📜</span> Audit History
+            </a>
+          </nav>
+        </div>
+
+        <div class="pt-6 border-t border-slate-200 space-y-2 text-xs">
+          <button onclick="app.exitRecruiterWorkspace()" class="w-full py-2 px-3 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 font-semibold text-center block border border-rose-200 transition">
+            Exit Recruiter Workspace
+          </button>
+          <button onclick="app.setRole('landing')" class="w-full py-2 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-center block transition">
+            ← Main Menu
+          </button>
+        </div>
+      </aside>
+
+      <!-- HR Main Content Area -->
+      <section class="flex-1 bg-slate-50 p-6 lg:p-8 overflow-y-auto">
+
+        <!-- Top Recruiter Access Indicator & Title with Live Backend Status -->
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-slate-200 mb-6 bg-white p-5 rounded-2xl border shadow-xs">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-xs font-mono text-blue-700 font-bold uppercase tracking-wider">Recruiter Workspace</span>
+              <span class="text-slate-300">•</span>
+              <span class="text-xs text-slate-600 font-medium">Campus Hiring Management</span>
+            </div>
+            <h2 class="text-2xl font-black text-slate-900 tracking-tight">RECRUITER DASHBOARD</h2>
+            <p class="text-xs text-slate-500 mt-0.5">Welcome, Recruiter • Structured candidate evaluations filtered by verified merit parameters.</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="backend-status-badge"></div>
+            <button onclick="app.exitRecruiterWorkspace()" class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 text-xs font-semibold flex items-center gap-2 transition shadow-xs">
+              <span>🚪 Exit Workspace</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- SUB-TAB: HR DASHBOARD -->
+        <div id="hr-tab-dashboard" class="max-w-6xl mx-auto space-y-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-lg font-bold text-slate-900">Talent Acquisition Overview</h3>
+              <p class="text-xs text-slate-500 mt-0.5">Real-time candidate metrics across 5 configured campus hiring pipelines.</p>
+            </div>
+            <button onclick="if(window.FairHireAPI){window.FairHireAPI.syncInitialData();} app.renderHRDashboardMetrics();" class="text-xs font-semibold text-blue-600 hover:text-blue-800 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-50 border border-blue-200 transition">
+              <span>🔄 Refresh Data</span>
+            </button>
+          </div>
+
+          <!-- HR Metric Cards (5 Core Metrics) -->
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs border-t-4 border-t-slate-600">
+              <span class="text-xs font-medium text-slate-500">Total Jobs</span>
+              <div id="hr-metric-jobs" class="text-2xl font-black text-slate-900 mt-1">5</div>
+              <span class="text-[10px] text-slate-400 mt-0.5 block">Active Listings</span>
+            </div>
+            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs border-t-4 border-t-blue-600">
+              <span class="text-xs font-medium text-slate-500">Total Applications</span>
+              <div id="hr-metric-applicants" class="text-2xl font-black text-blue-600 mt-1">126</div>
+              <span class="text-[10px] text-slate-400 mt-0.5 block">Recorded in DB</span>
+            </div>
+            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs border-t-4 border-t-amber-500">
+              <span class="text-xs font-medium text-slate-500">Pending Review</span>
+              <div id="hr-metric-pending" class="text-2xl font-black text-amber-600 mt-1">74</div>
+              <span class="text-[10px] text-slate-400 mt-0.5 block">Awaiting Decision</span>
+            </div>
+            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs border-t-4 border-t-emerald-500">
+              <span class="text-xs font-medium text-slate-500">Accepted</span>
+              <div id="hr-metric-accepted" class="text-2xl font-black text-emerald-600 mt-1">18</div>
+              <span class="text-[10px] text-slate-400 mt-0.5 block">Shortlisted</span>
+            </div>
+            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs border-t-4 border-t-rose-500">
+              <span class="text-xs font-medium text-slate-500">Rejected</span>
+              <div id="hr-metric-rejected" class="text-2xl font-black text-rose-600 mt-1">34</div>
+              <span class="text-[10px] text-slate-400 mt-0.5 block">With Rationale</span>
+            </div>
+          </div>
+
+          <!-- Quick Action Preview -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="font-bold text-slate-900 text-base">Recent Verified Applicants</h3>
+                <p class="text-xs text-slate-500 mt-0.5">Top candidate submissions with verified assessment benchmarks.</p>
+              </div>
+              <button onclick="app.setHRTab('applicants')" class="text-xs font-semibold text-blue-600 hover:text-blue-800 hover:underline">Manage All Applicants →</button>
+            </div>
+            <div class="overflow-x-auto rounded-xl border border-slate-200">
+              <table class="w-full text-left">
+                <thead>
+                  <tr class="text-[11px] font-semibold text-slate-500 border-b border-slate-200 bg-slate-50">
+                    <th class="p-3">Candidate ID</th>
+                    <th class="p-3">Applied Job</th>
+                    <th class="p-3">FairHire Score</th>
+                    <th class="p-3">Assessments</th>
+                    <th class="p-3">Key Skills</th>
+                    <th class="p-3">Status</th>
+                    <th class="p-3 text-right">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="hr-dashboard-recent-table" class="divide-y divide-slate-100 text-xs"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUB-TAB: HR JOBS -->
+        <div id="hr-tab-jobs" class="max-w-4xl mx-auto space-y-6 hidden">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-900">Active Hiring Positions</h2>
+            <p class="text-xs text-slate-500 mt-1">Manage active campus job postings and jump directly to candidate pools.</p>
+          </div>
+          <div id="hr-jobs-container" class="space-y-4"></div>
+        </div>
+
+        <!-- SUB-TAB: APPLICANTS MANAGEMENT -->
+        <div id="hr-tab-applicants" class="max-w-6xl mx-auto space-y-6 hidden">
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <h2 class="text-2xl font-bold text-slate-900">Applicant Pool Management</h2>
+              <p class="text-xs text-slate-500 mt-1">Review candidates using standardized scores, skill verification, and practical assessments.</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="if(window.FairHireAPI){window.FairHireAPI.syncInitialData();} app.renderHRApplicantsTable();" class="text-xs font-semibold text-blue-600 hover:text-blue-800 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-50 border border-blue-200 transition">
+                <span>🔄 Sync with Database</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Search & Filter Controls -->
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div class="flex items-center gap-2 flex-1 min-w-[240px]">
+              <span class="text-slate-400">🔍</span>
+              <input type="text" id="hr-search-applicants" oninput="app.renderHRApplicantsTable()" placeholder="Search by Candidate ID, Job Title, or Skill (e.g. Java, FH1001)..." class="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 text-xs focus:outline-none focus:border-blue-500 focus:bg-white transition">
+            </div>
+
+            <!-- Fast Filter Tabs -->
+            <div class="flex items-center gap-2">
+              <span class="text-slate-500 font-medium">Status:</span>
+              <select id="hr-filter-status" onchange="app.renderHRApplicantsTable()" class="bg-slate-50 border border-slate-200 text-slate-800 px-3 py-2 rounded-xl text-xs focus:outline-none focus:border-blue-500 font-medium">
+                <option value="all">All Applications</option>
+                <option value="Pending">Pending / Under Review</option>
+                <option value="INTERVIEW_REQUESTED">Interview Requested</option>
+                <option value="Accepted">Selected / Accepted</option>
+                <option value="Rejected">Rejected</option>
+              </select>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <span class="text-slate-500 font-medium">Sort:</span>
+              <select id="hr-sort-score" onchange="app.renderHRApplicantsTable()" class="bg-slate-50 border border-slate-200 text-slate-800 px-3 py-2 rounded-xl text-xs focus:outline-none focus:border-blue-500 font-medium">
+                <option value="desc">Score: Highest First</option>
+                <option value="asc">Score: Lowest First</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Applicants Table -->
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left">
+                <thead>
+                  <tr class="text-[11px] font-semibold text-slate-500 border-b border-slate-200 bg-slate-50">
+                    <th class="p-4">Candidate ID</th>
+                    <th class="p-4">Candidate / Target Role</th>
+                    <th class="p-4">FairHire Score</th>
+                    <th class="p-4">Assessments</th>
+                    <th class="p-4">Verified Skills</th>
+                    <th class="p-4">Status</th>
+                    <th class="p-4 text-right">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="hr-applicants-tbody" class="divide-y divide-slate-100"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUB-TAB: CANDIDATE EVALUATION (ASSESSMENT-LOCK PROTOCOL) -->
+        <div id="hr-tab-evaluation" class="max-w-6xl mx-auto space-y-6 hidden">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-900">Structured Candidate Evaluation</h2>
+            <p class="text-xs text-slate-500 mt-1">Enforcing the FairHire Assessment-Lock protocol: candidates with pending assessments remain locked to ensure zero bias.</p>
+          </div>
+
+          <!-- Protocol Explainer Card -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+            <div class="p-5 rounded-2xl bg-amber-50/70 border border-amber-200 space-y-2">
+              <div class="flex items-center gap-2 text-amber-800 font-bold">
+                <span>🔒</span> Before Assessment Completion
+              </div>
+              <p class="text-slate-700 font-medium">Assessment: <span class="text-amber-700 font-mono">⏳ Not Completed</span> • Evaluation: <span class="text-slate-500 font-mono">🔒 Locked</span></p>
+              <p class="text-[11px] text-slate-600 leading-relaxed">All candidate marks, CGPA, FairHire score, assessment score, and project details are hidden. Recruiters cannot view scores or submit decisions until candidate assessment is submitted.</p>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-emerald-50/70 border border-emerald-200 space-y-2">
+              <div class="flex items-center gap-2 text-emerald-800 font-bold">
+                <span>🔓</span> After Assessment Completion
+              </div>
+              <p class="text-slate-700 font-medium">Assessment: <span class="text-emerald-700 font-mono">✓ Completed</span> • Evaluation: <span class="text-emerald-700 font-mono">🔓 Available</span></p>
+              <p class="text-[11px] text-slate-600 leading-relaxed">Full 50-point transparent FairHire score, academic score, technical depth, verified skills, and project reviews unlock. Recruiters can review and submit decisions with feedback.</p>
+            </div>
+          </div>
+
+          <!-- Evaluation Table -->
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+            <div class="p-4 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+              <h3 class="font-bold text-slate-900 text-sm">Evaluation Pool & Status Tracker</h3>
+              <span class="text-xs text-slate-500">Click any candidate to inspect evaluation status</span>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs">
+                <thead>
+                  <tr class="text-[11px] font-semibold text-slate-500 border-b border-slate-200 bg-slate-50">
+                    <th class="p-4">Candidate ID</th>
+                    <th class="p-4">Applied Position</th>
+                    <th class="p-4">Applied Date</th>
+                    <th class="p-4">Assessment Status</th>
+                    <th class="p-4">Evaluation Lock</th>
+                    <th class="p-4 text-right">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="hr-evaluation-tbody" class="divide-y divide-slate-100"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUB-TAB: ASSESSMENTS -->
+        <div id="hr-tab-assessments" class="max-w-5xl mx-auto space-y-6 hidden">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-900">Standardized Skill Assessments</h2>
+            <p class="text-xs text-slate-500 mt-1">Automated, tamper-proof merit benchmarks used to objectively calibrate candidate skill ratings.</p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
+              <div class="flex justify-between items-start">
+                <span class="text-2xl">☕</span>
+                <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-blue-50 text-blue-700 border border-blue-200 font-semibold">Active</span>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-900 text-sm">Java Enterprise</h4>
+                <p class="text-[11px] text-slate-500 mt-0.5">OOP, Memory, Concurrency, Spring</p>
+              </div>
+              <div class="pt-2 border-t border-slate-100 text-[11px] text-slate-600 flex justify-between">
+                <span>Threshold:</span>
+                <span class="font-bold text-slate-900">70% / 10 Pts</span>
+              </div>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
+              <div class="flex justify-between items-start">
+                <span class="text-2xl">🐍</span>
+                <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-50 text-emerald-700 border border-emerald-200 font-semibold">Active</span>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-900 text-sm">Python Foundations</h4>
+                <p class="text-[11px] text-slate-500 mt-0.5">Data types, Lambdas, DSA, APIs</p>
+              </div>
+              <div class="pt-2 border-t border-slate-100 text-[11px] text-slate-600 flex justify-between">
+                <span>Threshold:</span>
+                <span class="font-bold text-slate-900">70% / 10 Pts</span>
+              </div>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
+              <div class="flex justify-between items-start">
+                <span class="text-2xl">🗄️</span>
+                <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-purple-50 text-purple-700 border border-purple-200 font-semibold">Active</span>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-900 text-sm">Relational SQL</h4>
+                <p class="text-[11px] text-slate-500 mt-0.5">Joins, Grouping, Indexes, Keys</p>
+              </div>
+              <div class="pt-2 border-t border-slate-100 text-[11px] text-slate-600 flex justify-between">
+                <span>Threshold:</span>
+                <span class="font-bold text-slate-900">65% / 10 Pts</span>
+              </div>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
+              <div class="flex justify-between items-start">
+                <span class="text-2xl">⚡</span>
+                <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-amber-50 text-amber-700 border border-amber-200 font-semibold">Active</span>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-900 text-sm">Data Structures</h4>
+                <p class="text-[11px] text-slate-500 mt-0.5">Trees, BST, HashMaps, Big-O</p>
+              </div>
+              <div class="pt-2 border-t border-slate-100 text-[11px] text-slate-600 flex justify-between">
+                <span>Threshold:</span>
+                <span class="font-bold text-slate-900">75% / 10 Pts</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUB-TAB: INTERVIEWS -->
+        <div id="hr-tab-interviews" class="max-w-5xl mx-auto space-y-6 hidden">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-900">Structured Candidate Interviews</h2>
+            <p class="text-xs text-slate-500 mt-1">Calendar coordination and panel evaluations for shortlisted candidates.</p>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs">
+                <thead>
+                  <tr class="text-[11px] font-semibold text-slate-500 border-b border-slate-200 bg-slate-50">
+                    <th class="p-4">Candidate ID</th>
+                    <th class="p-4">Target Role</th>
+                    <th class="p-4">Interview Date & Time</th>
+                    <th class="p-4">Stage / Round</th>
+                    <th class="p-4">Lead Evaluator</th>
+                    <th class="p-4">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="hr-interviews-tbody" class="divide-y divide-slate-100"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUB-TAB: NOTIFICATIONS -->
+        <div id="hr-tab-notifications" class="max-w-4xl mx-auto space-y-6 hidden">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-900">Recruiter Activity & Notifications</h2>
+            <p class="text-xs text-slate-500 mt-1">Real-time alerts regarding candidate intake, assessment submissions, and status changes.</p>
+          </div>
+
+          <div id="hr-notifications-list" class="space-y-3"></div>
+        </div>
+
+        <!-- SUB-TAB: AUDIT HISTORY -->
+        <div id="hr-tab-audithistory" class="max-w-5xl mx-auto space-y-6 hidden">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-900">Hiring Decision Audit Trail</h2>
+            <p class="text-xs text-slate-500 mt-1">Transparent, tamper-proof record of all recruitment acceptances and rejections with mandatory rationale.</p>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs">
+                <thead>
+                  <tr class="text-[11px] font-semibold text-slate-500 border-b border-slate-200 bg-slate-50">
+                    <th class="p-4">Timestamp</th>
+                    <th class="p-4">Candidate ID</th>
+                    <th class="p-4">Decision</th>
+                    <th class="p-4">Recruiter / Panel</th>
+                    <th class="p-4">Documented Rationale</th>
+                  </tr>
+                </thead>
+                <tbody id="hr-audit-tbody" class="divide-y divide-slate-100"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUB-TAB: SETTINGS -->
+        <div id="hr-tab-settings" class="max-w-3xl mx-auto space-y-6 hidden">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-900">Recruiter Preferences & Fair Hiring Guardrails</h2>
+            <p class="text-xs text-slate-500 mt-1">Configured policies ensuring zero algorithmic demographic bias.</p>
+          </div>
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-4 text-xs">
+            <div class="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+              <div>
+                <strong class="text-slate-900">Blind Candidate Screening Mode</strong>
+                <p class="text-slate-500 mt-0.5">Demographics and photos automatically stripped from recruiter views.</p>
+              </div>
+              <span class="text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-full font-bold text-[11px]">ACTIVE (Enforced)</span>
+            </div>
+            <div class="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+              <div>
+                <strong class="text-slate-900">Mandatory Decision Rationale</strong>
+                <p class="text-slate-500 mt-0.5">Recruiters must supply written job-related justification upon Accept/Reject.</p>
+              </div>
+              <span class="text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-full font-bold text-[11px]">ACTIVE (Enforced)</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- MODALS -->
+  <!-- ========================================================= -->
+
+  <!-- ASSESSMENT SUBMISSION CONFIRMATION MODAL -->
+  <div id="assessment-confirm-modal" class="fixed inset-0 z-50 modal-backdrop hidden items-center justify-center p-4">
+    <div class="light-card max-w-md w-full p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-2xl space-y-5 bg-white">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div class="flex items-center gap-2.5">
+          <span class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-base font-bold">📝</span>
+          <h3 class="font-bold text-base text-slate-900">Submit Assessment?</h3>
+        </div>
+        <button onclick="app.closeModal('assessment-confirm-modal')" class="text-slate-400 hover:text-slate-600 font-bold text-lg">✕</button>
+      </div>
+      <p class="text-xs text-slate-600 leading-relaxed">
+        Are you ready to submit your <strong class="text-slate-800">FairHire Technical Skills Assessment</strong> for dynamic evaluation?
+      </p>
+      <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-1">
+        <div class="flex items-center justify-between">
+          <span class="text-slate-600 font-medium">Questions Answered:</span>
+          <span id="confirm-answered-count" class="font-bold text-blue-700">0 of 15</span>
+        </div>
+      </div>
+      <div id="confirm-unanswered-notice" class="hidden text-xs"></div>
+      <div class="flex items-center gap-3 pt-2">
+        <button type="button" onclick="app.closeModal('assessment-confirm-modal')" class="flex-1 py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs transition">
+          Review Answers
+        </button>
+        <button type="button" onclick="app.submitAssessment()" class="flex-1 py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md shadow-emerald-600/20 transition">
+          ✓ Confirm & Submit
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JOB-SPECIFIC CASE-BASED ASSESSMENT MODAL (TASK 2) -->
+  <div id="case-assessment-modal" class="fixed inset-0 z-50 modal-backdrop hidden items-center justify-center p-4">
+    <div class="cand-glass-card max-w-4xl w-full p-6 sm:p-8 rounded-3xl border border-indigo-100 shadow-2xl space-y-5 bg-white max-h-[92vh] overflow-y-auto">
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-xs font-mono font-bold text-violet-700 uppercase tracking-wider" id="case-modal-role-badge">JOB ASSESSMENT</span>
+            <span class="text-[11px] px-2.5 py-0.5 rounded-full bg-violet-50 text-violet-700 border border-violet-200 font-bold" id="case-modal-company-badge">Zoho</span>
+          </div>
+          <h3 id="case-modal-title" class="font-extrabold text-xl text-slate-900 tracking-tight">Software Developer Case Assessment</h3>
+          <p id="case-modal-subtitle" class="text-xs text-slate-500 mt-0.5">Role-specific practical scenario evaluation linked to your job application.</p>
+        </div>
+        <button onclick="app.closeModal('case-assessment-modal')" class="text-slate-400 hover:text-slate-600 font-bold text-xl p-1">✕</button>
+      </div>
+
+      <!-- Section Navigation: Case Assessment | Video Interview | Screen Sharing -->
+      <div class="flex flex-wrap items-center justify-between gap-3 p-2 rounded-2xl bg-slate-50 border border-slate-200 text-xs">
+        <div class="flex items-center gap-2">
+          <button type="button" id="case-tab-btn-case" onclick="app.setCaseTab('case')" class="px-5 py-2.5 rounded-xl font-bold btn-jewel-primary text-white shadow-md transition">
+            📝 Case Assessment
+          </button>
+          <button type="button" id="case-tab-btn-video" onclick="app.setCaseTab('video')" class="px-4 py-2 rounded-xl font-semibold bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 transition flex items-center gap-1.5 cursor-pointer">
+            <span>📹 Video Interview</span>
+            <span class="text-[10px] px-1.5 py-0.2 rounded bg-emerald-50 text-emerald-700 font-mono font-bold">Live WebRTC</span>
+          </button>
+          <button type="button" id="case-tab-btn-screen" onclick="app.setCaseTab('screen')" class="px-4 py-2 rounded-xl font-semibold bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 transition flex items-center gap-1.5 cursor-pointer">
+            <span>🖥️ Screen Sharing</span>
+            <span class="text-[10px] px-1.5 py-0.2 rounded bg-purple-50 text-purple-700 font-mono font-bold">Live Broadcast</span>
+          </button>
+        </div>
+        <span class="text-[11px] font-mono text-slate-500">6 Questions • Application Requirement</span>
+      </div>
+
+      <!-- PANEL 1: CASE ASSESSMENT QUESTIONS -->
+      <div id="case-panel-case" class="space-y-5">
+        <!-- Scenario Narrative Card -->
+        <div id="case-scenario-card" class="p-5 rounded-2xl bg-gradient-to-br from-violet-50/90 via-purple-50/50 to-indigo-50/70 border border-violet-200 shadow-sm space-y-2">
+          <div class="flex items-center gap-2 text-violet-950">
+            <span class="text-base font-bold">🏢 Practical Case Scenario:</span>
+            <span id="case-scenario-title" class="font-bold text-xs uppercase tracking-wider text-violet-800"></span>
+          </div>
+          <p id="case-scenario-text" class="text-xs sm:text-sm text-slate-700 leading-relaxed"></p>
+        </div>
+
+        <!-- Questions Container -->
+        <div id="case-questions-container" class="space-y-4">
+          <!-- Dynamically populated by app.js -->
+        </div>
+
+        <!-- Case Footer Submission Area -->
+        <div class="pt-4 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="text-xs text-slate-500">
+            <span id="case-answered-counter" class="font-bold text-violet-700">0 of 6 answered</span>
+            <span class="ml-2 text-slate-400">• Your verified profile + case assessment will be transmitted directly to HR.</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <button type="button" onclick="app.closeModal('case-assessment-modal')" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs transition cursor-pointer">
+              Cancel
+            </button>
+            <button type="button" id="case-submit-btn" onclick="app.submitCaseAssessment()" class="px-6 py-2.5 rounded-xl btn-jewel-primary text-white font-bold text-xs shadow-lg transition flex items-center gap-2 cursor-pointer">
+              <span>✓ Submit Assessment & Apply</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 2: LIVE VIDEO INTERVIEW & PROCTORING (WORKING WebRTC) -->
+      <div id="case-panel-video" class="space-y-4 hidden">
+        <div class="p-4 sm:p-5 rounded-2xl bg-slate-900 border border-slate-800 text-white space-y-4 shadow-xl">
+          <div class="flex flex-wrap items-center justify-between border-b border-slate-800 pb-3 gap-2">
+            <div class="flex items-center gap-2.5">
+              <span id="video-session-pulse" class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
+              <div>
+                <span class="font-bold text-xs sm:text-sm text-white">Live Video Interview & AI Proctoring Stream</span>
+                <span class="text-[10px] text-slate-400 block">Real-time WebRTC camera feed with live audio capture</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <span id="video-session-timer" class="text-xs font-mono text-emerald-400 bg-emerald-950/80 px-2.5 py-1 rounded-lg border border-emerald-800">Ready • Session Open</span>
+            </div>
+          </div>
+
+          <!-- Video Feeds Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Candidate Preview Feed -->
+            <div class="aspect-video rounded-2xl bg-slate-950 border border-slate-800 relative flex flex-col items-center justify-center overflow-hidden shadow-inner group">
+              <!-- Real Video Element -->
+              <video id="candidate-webcam-video" autoplay playsinline muted class="w-full h-full object-cover hidden" style="transform: scaleX(-1);"></video>
+
+              <!-- Placeholder when camera is inactive -->
+              <div id="candidate-cam-placeholder" class="flex flex-col items-center justify-center p-6 text-center space-y-3 z-10">
+                <div class="w-16 h-16 rounded-full bg-blue-600/20 border border-blue-500/30 text-blue-400 flex items-center justify-center text-3xl mb-1 shadow-inner">
+                  👤
+                </div>
+                <div>
+                  <h4 class="text-xs font-bold text-slate-200">Candidate Camera is Offline</h4>
+                  <p class="text-[11px] text-slate-400 mt-0.5">Click below to activate your real webcam and microphone.</p>
+                </div>
+                <div class="flex flex-wrap items-center justify-center gap-2 pt-1">
+                  <button type="button" onclick="app.startWebcam()" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold shadow-lg shadow-blue-600/30 transition flex items-center gap-1.5 cursor-pointer">
+                    <span>📹 Start My Camera & Mic</span>
+                  </button>
+                  <button type="button" onclick="app.startVirtualWebcam()" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium border border-slate-700 transition flex items-center gap-1 cursor-pointer" title="Use animated test stream if you do not have a physical webcam">
+                    <span>🧪 Test Pattern Feed</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Live Overlays when stream is active -->
+              <div id="cam-active-overlays" class="hidden">
+                <div class="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-black/70 backdrop-blur-sm text-[10px] text-emerald-400 font-mono border border-white/10 z-20">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <span id="cam-res-label">1280x720 • Active</span>
+                </div>
+
+                <div class="absolute top-3 right-3 px-2.5 py-1 rounded-lg bg-emerald-600/90 text-[10px] text-white font-bold tracking-wide flex items-center gap-1.5 shadow-sm z-20">
+                  <span>● LIVE PROCTORING</span>
+                </div>
+
+                <div class="absolute bottom-3 left-3 px-2.5 py-1 rounded-lg bg-black/70 backdrop-blur-sm text-[11px] text-white font-medium flex items-center gap-2 border border-white/10 z-20">
+                  <span>You (Candidate)</span>
+                  <span id="cam-mic-badge" class="text-[10px] px-1.5 py-0.2 rounded bg-emerald-950 text-emerald-300 border border-emerald-800 font-mono">🎤 MIC ON</span>
+                </div>
+
+                <!-- Live Audio Visualizer Bar -->
+                <div class="absolute bottom-3 right-3 w-28 px-2 py-1 rounded-lg bg-black/70 backdrop-blur-sm border border-white/10 z-20 flex items-center gap-2">
+                  <span class="text-[10px] text-slate-400 font-mono">VOL</span>
+                  <div class="flex-1 h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                    <div id="cam-audio-meter" class="h-full bg-emerald-400 transition-all duration-75" style="width: 0%;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Recruiter / Proctor Live Feed Box -->
+            <div class="aspect-video rounded-2xl bg-slate-950 border border-slate-800 relative flex flex-col justify-between p-4 overflow-hidden shadow-inner">
+              <div class="flex items-center justify-between border-b border-slate-800/80 pb-2 z-10">
+                <div class="flex items-center gap-2">
+                  <div class="w-7 h-7 rounded-lg bg-purple-600/30 border border-purple-400 text-purple-300 flex items-center justify-center text-sm font-bold">
+                    👨‍💼
+                  </div>
+                  <div>
+                    <span class="text-xs text-white font-bold block">FairHire Evaluator Room</span>
+                    <span class="text-[10px] text-purple-400 font-mono">Technical Proctor Bot Active</span>
+                  </div>
+                </div>
+                <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800 text-[10px] font-mono">ENCRYPTED</span>
+              </div>
+
+              <!-- Animated Proctor Audio Wave / Visualization -->
+              <div class="flex flex-col items-center justify-center py-4 space-y-3 z-10">
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-600 to-indigo-600 flex items-center justify-center text-3xl shadow-lg shadow-purple-600/20">
+                  🎯
+                </div>
+                <div class="text-center">
+                  <p class="text-xs font-semibold text-slate-200">AI Proctoring & Session Monitor</p>
+                  <p class="text-[11px] text-slate-400 mt-0.5">Focus tracking, integrity audit & audio analysis active</p>
+                </div>
+                <div class="flex items-center gap-1 text-[10px] text-emerald-400 font-mono bg-emerald-950/40 px-3 py-1 rounded-full border border-emerald-900/50">
+                  <span>✓ 1 Face Detected</span> • <span>✓ Noise Level Normal</span>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between pt-2 border-t border-slate-800/80 text-[10px] text-slate-400 z-10">
+                <span>Assessment Timer Synchronized</span>
+                <span class="text-emerald-400 font-mono">● Stream Secure</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Real Controls Toolbar -->
+          <div class="p-3 rounded-2xl bg-slate-950 border border-slate-800 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+            <button type="button" id="btn-toggle-cam-power" onclick="app.toggleWebcamPower()" class="px-5 py-2.5 rounded-xl btn-jewel-primary text-white text-xs font-bold flex items-center gap-1.5 transition cursor-pointer shadow-md">
+              <span>📹</span> <span id="label-cam-power">Start Camera</span>
+            </button>
+            <button type="button" id="btn-toggle-mic" onclick="app.toggleMic()" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold flex items-center gap-1.5 transition cursor-pointer border border-slate-700">
+              <span>🎤</span> <span id="label-mic-status">Mute Mic</span>
+            </button>
+            <button type="button" id="btn-toggle-video-track" onclick="app.toggleCamTrack()" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold flex items-center gap-1.5 transition cursor-pointer border border-slate-700">
+              <span>👁️</span> <span id="label-cam-track">Hide Video</span>
+            </button>
+            <button type="button" onclick="app.setCaseTab('screen')" class="px-4 py-2.5 rounded-xl bg-purple-700 hover:bg-purple-600 text-white text-xs font-bold flex items-center gap-1.5 transition cursor-pointer shadow-sm">
+              <span>🖥️</span> <span>Share Screen</span>
+            </button>
+            <button type="button" onclick="app.setCaseTab('case')" class="px-4 py-2.5 rounded-xl btn-jewel-emerald text-white text-xs font-bold flex items-center gap-1.5 transition cursor-pointer shadow-sm">
+              <span>📝</span> <span>Return to Questions</span>
+            </button>
+          </div>
+
+          <div id="cam-permission-hint" class="text-[11px] text-slate-400 text-center flex items-center justify-center gap-2">
+            <span>🛡️ Real WebRTC stream. When prompted by your browser, click <b>"Allow"</b> for Camera & Microphone.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 3: REAL SCREEN SHARING BROADCAST (WORKING WebRTC) -->
+      <div id="case-panel-screen" class="space-y-4 hidden">
+        <div class="p-4 sm:p-5 rounded-2xl bg-slate-900 border border-slate-800 text-white space-y-4 shadow-xl">
+          <div class="flex flex-wrap items-center justify-between border-b border-slate-800 pb-3 gap-2">
+            <div class="flex items-center gap-2.5">
+              <span id="screen-session-pulse" class="w-3 h-3 rounded-full bg-purple-500 animate-pulse"></span>
+              <div>
+                <span class="font-bold text-xs sm:text-sm text-white">Live Screen Broadcast & Practical Code Review</span>
+                <span class="text-[10px] text-slate-400 block">Stream your entire desktop, specific coding IDE window, or browser tab</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <span id="screen-session-status" class="text-xs font-mono text-purple-400 bg-purple-950/80 px-2.5 py-1 rounded-lg border border-purple-800">Screen Standby</span>
+            </div>
+          </div>
+
+          <!-- Screen Share Display Container -->
+          <div class="aspect-video rounded-2xl bg-slate-950 border border-slate-800 relative flex flex-col items-center justify-center overflow-hidden shadow-inner">
+            <!-- Real Screen Video Element -->
+            <video id="candidate-screen-video" autoplay playsinline class="w-full h-full object-contain hidden bg-black"></video>
+
+            <!-- Placeholder before Screen is Shared -->
+            <div id="screen-share-placeholder" class="flex flex-col items-center justify-center p-8 text-center space-y-3 z-10 max-w-lg">
+              <div class="w-16 h-16 rounded-2xl bg-purple-600/20 border border-purple-500/30 text-purple-400 flex items-center justify-center text-3xl mb-1 shadow-inner">
+                🖥️
+              </div>
+              <div>
+                <h4 class="text-sm font-bold text-slate-200">Share Your Screen with Interviewer</h4>
+                <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+                  Demonstrate your solution, IDE editor (VS Code, IntelliJ, etc.), or terminal directly to the recruiter in real time.
+                </p>
+              </div>
+              <div class="pt-2">
+                <button type="button" onclick="app.startScreenShare()" class="px-7 py-3 rounded-2xl btn-jewel-primary text-white font-bold text-xs shadow-lg transition flex items-center gap-2 cursor-pointer">
+                  <span>🖥️ Start Live Screen Share</span>
+                </button>
+              </div>
+              <p class="text-[11px] text-slate-500 italic">
+                Your browser will show a standard prompt to pick your Screen, Window, or Tab.
+              </p>
+            </div>
+
+            <!-- Overlays when screen is sharing -->
+            <div id="screen-active-overlays" class="hidden">
+              <div class="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-black/80 backdrop-blur-sm text-[10px] text-purple-300 font-mono border border-white/10 z-20">
+                <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
+                <span id="screen-res-label">1920x1080 • Live</span>
+              </div>
+
+              <div class="absolute top-3 right-3 px-2.5 py-1 rounded-lg bg-purple-600 text-[10px] text-white font-bold tracking-wide flex items-center gap-1.5 shadow-sm z-20">
+                <span>● BROADCASTING ACTIVE</span>
+              </div>
+
+              <div class="absolute bottom-3 left-3 px-2.5 py-1 rounded-lg bg-black/80 backdrop-blur-sm text-[11px] text-white font-medium flex items-center gap-2 border border-white/10 z-20">
+                <span>Screen Feed Transmitted to Recruiter Portal</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controls Toolbar -->
+          <div class="p-3 rounded-2xl bg-slate-950 border border-slate-800 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+            <button type="button" id="btn-screen-action" onclick="app.toggleScreenShare()" class="px-5 py-2.5 rounded-xl btn-jewel-primary text-white text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shadow-md">
+              <span>🖥️</span> <span id="label-screen-action">Start Live Screen Share</span>
+            </button>
+            <button type="button" onclick="app.setCaseTab('video')" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold flex items-center gap-1.5 transition cursor-pointer border border-slate-700">
+              <span>📹</span> <span>Switch to Video Feed</span>
+            </button>
+            <button type="button" onclick="app.setCaseTab('case')" class="px-4 py-2.5 rounded-xl btn-jewel-emerald text-white text-xs font-bold flex items-center gap-1.5 transition cursor-pointer shadow-sm">
+              <span>📝</span> <span>Return to Questions</span>
+            </button>
+          </div>
+
+          <p class="text-[11px] text-slate-400 text-center">
+            💡 Tip: You can switch between answering questions and sharing your screen at any point without losing your progress.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPLICATION CONFIRMATION MODAL -->
+  <div id="application-modal" class="fixed inset-0 z-50 modal-backdrop hidden items-center justify-center p-4">
+    <div class="light-card max-w-lg w-full p-6 rounded-2xl border border-slate-200 shadow-2xl space-y-5 bg-white">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <h3 class="font-bold text-lg text-slate-900">Confirm Job Application</h3>
+        <button onclick="app.closeModal('application-modal')" class="text-slate-400 hover:text-slate-600 font-bold">✕</button>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex justify-between">
+          <span class="text-slate-500 font-medium">Position:</span>
+          <span id="modal-app-job" class="font-bold text-slate-900"></span>
+        </div>
+        <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex justify-between">
+          <span class="text-slate-500 font-medium">Company:</span>
+          <span id="modal-app-company" class="font-bold text-blue-600"></span>
+        </div>
+        <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex justify-between">
+          <span class="text-slate-500 font-medium">Applicant:</span>
+          <span id="modal-app-candidate" class="font-bold text-slate-900"></span>
+        </div>
+        <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex justify-between">
+          <span class="text-slate-500 font-medium">Verified FairHire Score:</span>
+          <span id="modal-app-score" class="font-bold text-emerald-700"></span>
+        </div>
+        <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
+          <span class="text-slate-500 font-medium block mb-1">Submitted Skills:</span>
+          <span id="modal-app-skills" class="font-medium text-slate-800"></span>
+        </div>
+      </div>
+
+      <p class="text-[11px] text-slate-500 italic">
+        By submitting, your verified credentials will be transmitted directly to the company hiring team with blind de-biased formatting.
+      </p>
+
+      <div class="flex items-center justify-end gap-3 pt-2">
+        <button onclick="app.closeModal('application-modal')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold transition">
+          Cancel
+        </button>
+        <button id="submit-application-btn" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold shadow-lg shadow-blue-600/20 transition">
+          Submit Application
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HR CANDIDATE DETAILS & DECISION MODAL (ASSESSMENT-LOCK SYSTEM) -->
+  <div id="hr-candidate-modal" class="fixed inset-0 z-50 modal-backdrop hidden items-center justify-center p-4">
+    <div class="light-card max-w-2xl w-full p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto bg-white text-slate-800">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span id="hr-modal-cand-id" class="text-xs font-mono text-blue-700 font-bold">Candidate ID: FH1001</span>
+            <span id="hr-modal-assessment-badge" class="text-[10px] font-mono px-2 py-0.5 rounded font-semibold"></span>
+            <span id="hr-modal-eval-badge" class="text-[10px] font-mono px-2 py-0.5 rounded font-semibold"></span>
+          </div>
+          <h3 id="hr-modal-cand-job" class="font-bold text-lg text-slate-900">Java Developer • ABC Technologies</h3>
+        </div>
+        <button onclick="app.closeModal('hr-candidate-modal')" class="text-slate-400 hover:text-slate-700 font-bold text-xl p-1">✕</button>
+      </div>
+
+      <!-- LOCKED STATE VIEW (BEFORE ASSESSMENT) -->
+      <div id="hr-candidate-locked-view" class="p-6 rounded-2xl bg-amber-50 border border-amber-200 text-center space-y-4">
+        <div class="w-16 h-16 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center mx-auto text-3xl border border-amber-200 shadow-xs">
+          🔒
+        </div>
+        <div>
+          <h4 class="font-bold text-amber-900 text-lg">Evaluation Locked</h4>
+          <p class="text-xs text-slate-600 mt-1 max-w-md mx-auto">
+            "Evaluation will become available after the candidate completes the required assessment."
+          </p>
+        </div>
+
+        <div class="max-w-md mx-auto p-4 rounded-xl bg-white border border-slate-200 text-left text-xs space-y-2 text-slate-700 shadow-xs">
+          <div class="flex justify-between border-b border-slate-100 pb-1.5">
+            <span class="text-slate-500">Candidate ID:</span>
+            <span id="hr-locked-view-id" class="font-mono font-bold text-slate-900">FH1001</span>
+          </div>
+          <div class="flex justify-between border-b border-slate-100 pb-1.5">
+            <span class="text-slate-500">Assessment:</span>
+            <span class="text-amber-700 font-semibold font-mono">⏳ Not Completed</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-slate-500">Evaluation:</span>
+            <span class="text-slate-500 font-semibold font-mono">🔒 Locked</span>
+          </div>
+        </div>
+
+        <div class="p-3 rounded-xl bg-white border border-slate-200 max-w-md mx-auto text-[11px] text-slate-600 text-left space-y-1 shadow-xs">
+          <p class="font-semibold text-slate-900">🛡️ Fair Hiring Anti-Bias Protection:</p>
+          <p>Academic marks, CGPA, FairHire score, assessment score, technical score, certification score, and project score are hidden from recruiters until candidate skill evaluation is submitted.</p>
+        </div>
+      </div>
+
+      <!-- UNLOCKED STATE VIEW (AFTER ASSESSMENT) -->
+      <div id="hr-candidate-unlocked-view" class="space-y-6 hidden">
+        <!-- Candidate Overview Bar -->
+        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div>
+            <span class="text-slate-500 block text-[10px] font-medium">Candidate Full Name</span>
+            <span id="hr-modal-cand-name" class="font-bold text-sm text-slate-900"></span>
+            <span id="hr-modal-cand-email" class="text-slate-500 font-mono ml-2"></span>
+          </div>
+          <div>
+            <span class="text-slate-500 block text-[10px] font-medium">Applied Date</span>
+            <span id="hr-modal-cand-applied-date" class="font-mono text-slate-700 font-medium"></span>
+          </div>
+          <div>
+            <span class="text-slate-500 block text-[10px] font-medium">Current Status</span>
+            <span id="hr-modal-cand-status-badge" class="px-2.5 py-0.5 rounded-full font-semibold text-[11px] badge-pending"></span>
+          </div>
+        </div>
+
+        <!-- Score Breakdown Strip (All Pillars & Assessments) -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-2 text-center text-xs">
+          <div class="p-3 rounded-xl bg-white border border-slate-200 shadow-xs">
+            <span class="text-slate-500 block text-[10px] font-medium">FairHire Score</span>
+            <span id="hr-modal-cand-score" class="font-black text-sm text-blue-600"></span>
+          </div>
+          <div class="p-3 rounded-xl bg-white border border-slate-200 shadow-xs">
+            <span class="text-slate-500 block text-[10px] font-medium">General MCQ</span>
+            <span id="hr-modal-cand-gen-assess" class="font-bold text-emerald-600"></span>
+          </div>
+          <div class="p-3 rounded-xl bg-white border border-slate-200 shadow-xs">
+            <span class="text-slate-500 block text-[10px] font-medium">Role Case</span>
+            <span id="hr-modal-cand-case-assess" class="font-bold text-indigo-600"></span>
+          </div>
+          <!-- Clickable Academic Pillar Card with Inspection Indicator -->
+          <button type="button" onclick="app.toggleHRAcademicDetails()" class="p-3 rounded-xl bg-gradient-to-b from-indigo-50/80 to-white border border-indigo-300/80 shadow-xs hover:border-indigo-500 hover:shadow-md transition text-center group cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-400" title="Click to view detailed academic percentage breakdown">
+            <div class="flex items-center justify-center gap-1 text-indigo-600 group-hover:text-indigo-800">
+              <span class="block text-[10px] font-bold">Academic</span>
+              <span class="text-[10px]">🔍</span>
+            </div>
+            <span id="hr-modal-cand-academic" class="font-black text-sm text-indigo-700 block mt-0.5"></span>
+            <span class="text-[9px] text-indigo-500 font-semibold block underline decoration-indigo-300 group-hover:text-indigo-700">Click Review</span>
+          </button>
+          <div class="p-3 rounded-xl bg-white border border-slate-200 shadow-xs">
+            <span class="text-slate-500 block text-[10px] font-medium">Technical Depth</span>
+            <span id="hr-modal-cand-tech" class="font-bold text-slate-800"></span>
+          </div>
+          <div class="p-3 rounded-xl bg-white border border-slate-200 shadow-xs">
+            <span class="text-slate-500 block text-[10px] font-medium">Certifications</span>
+            <span id="hr-modal-cand-certs" class="font-bold text-slate-800"></span>
+          </div>
+        </div>
+
+        <!-- DETAILED ACADEMIC REVIEW PANEL (Displays Exact Values Candidate Entered in Application) -->
+        <div id="hr-academic-detailed-review" class="p-5 rounded-2xl bg-gradient-to-br from-indigo-50/90 via-white to-purple-50/70 border-2 border-indigo-200 shadow-md space-y-4 text-xs transition-all duration-300">
+          <div class="flex flex-wrap items-center justify-between border-b border-indigo-100 pb-3 gap-2">
+            <div class="flex items-center gap-2.5">
+              <span class="w-8 h-8 rounded-xl bg-indigo-600 text-white flex items-center justify-center text-sm font-bold shadow-sm shadow-indigo-600/30">📊</span>
+              <div>
+                <h4 class="font-extrabold text-sm text-slate-900 tracking-tight flex items-center gap-2">
+                  <span>Candidate Academic Percentage Review</span>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800 border border-indigo-200 font-semibold">Pillar 1 Analysis</span>
+                </h4>
+                <p class="text-[11px] text-slate-500 mt-0.5">Exact academic percentages entered by candidate in their application • Verified against records</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 font-mono font-bold text-[10px] border border-emerald-300 flex items-center gap-1">
+                <span>✓</span> <span>Records Authenticated</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Academic Percentages 3-Column Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+            
+            <!-- 10th Standard Percentage Tile -->
+            <div class="p-4 rounded-xl bg-white border border-indigo-200/90 shadow-xs space-y-2 hover:border-indigo-400 transition">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-bold text-slate-700 uppercase tracking-wider font-mono">10th Standard (SSC)</span>
+                <span class="text-[10px] font-mono text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded-md border border-indigo-200 font-semibold">Max 4.0 Pts</span>
+              </div>
+              <div class="flex items-baseline gap-2 pt-1">
+                <span id="hr-academic-tenth-val" class="text-3xl font-black text-indigo-700">79%</span>
+                <span class="text-xs text-slate-400 font-medium">Percentage</span>
+              </div>
+              <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+                <div id="hr-academic-tenth-bar" class="bg-gradient-to-r from-indigo-500 to-indigo-700 h-2.5 rounded-full transition-all duration-500" style="width: 79%"></div>
+              </div>
+              <div class="flex justify-between items-center text-[11px] text-slate-500 pt-1 border-t border-slate-100">
+                <span>Pillar Score: <strong id="hr-academic-tenth-pts" class="text-slate-900 font-bold">3.2 / 4.0</strong></span>
+                <span id="hr-academic-tenth-tier" class="px-1.5 py-0.2 rounded text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">Verified</span>
+              </div>
+            </div>
+
+            <!-- 12th Standard Percentage Tile -->
+            <div class="p-4 rounded-xl bg-white border border-purple-200/90 shadow-xs space-y-2 hover:border-purple-400 transition">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-bold text-slate-700 uppercase tracking-wider font-mono">12th Standard (HSC)</span>
+                <span class="text-[10px] font-mono text-purple-700 bg-purple-50 px-2 py-0.5 rounded-md border border-purple-200 font-semibold">Max 4.0 Pts</span>
+              </div>
+              <div class="flex items-baseline gap-2 pt-1">
+                <span id="hr-academic-twelfth-val" class="text-3xl font-black text-purple-700">72%</span>
+                <span class="text-xs text-slate-400 font-medium">Percentage</span>
+              </div>
+              <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+                <div id="hr-academic-twelfth-bar" class="bg-gradient-to-r from-purple-500 to-purple-700 h-2.5 rounded-full transition-all duration-500" style="width: 72%"></div>
+              </div>
+              <div class="flex justify-between items-center text-[11px] text-slate-500 pt-1 border-t border-slate-100">
+                <span>Pillar Score: <strong id="hr-academic-twelfth-pts" class="text-slate-900 font-bold">2.9 / 4.0</strong></span>
+                <span id="hr-academic-twelfth-tier" class="px-1.5 py-0.2 rounded text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">Verified</span>
+              </div>
+            </div>
+
+            <!-- Degree CGPA Tile -->
+            <div class="p-4 rounded-xl bg-white border border-amber-200/90 shadow-xs space-y-2 hover:border-amber-400 transition">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-bold text-slate-700 uppercase tracking-wider font-mono">Degree CGPA</span>
+                <span class="text-[10px] font-mono text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200 font-semibold">Max 12.0 Pts</span>
+              </div>
+              <div class="flex items-baseline gap-1.5 pt-1">
+                <span id="hr-academic-cgpa-val" class="text-3xl font-black text-amber-700">8.5</span>
+                <span class="text-xs text-slate-500 font-bold">/ 10 CGPA</span>
+                <span id="hr-academic-cgpa-pct" class="text-[11px] text-slate-400 font-mono font-medium">(~80.8%)</span>
+              </div>
+              <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+                <div id="hr-academic-cgpa-bar" class="bg-gradient-to-r from-amber-400 to-amber-600 h-2.5 rounded-full transition-all duration-500" style="width: 85%"></div>
+              </div>
+              <div class="flex justify-between items-center text-[11px] text-slate-500 pt-1 border-t border-slate-100">
+                <span>Pillar Score: <strong id="hr-academic-cgpa-pts" class="text-slate-900 font-bold">10.2 / 12.0</strong></span>
+                <span id="hr-academic-cgpa-tier" class="px-1.5 py-0.2 rounded text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">Distinction</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Academic Summary Footer with Formula Transparency -->
+          <div class="p-3.5 rounded-xl bg-white/95 border border-indigo-100 flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div class="text-slate-700 leading-relaxed">
+              <span>🧮 <strong>Transparent Deterministic Formula:</strong> 10th (<span id="hr-academic-calc-tenth" class="font-mono font-bold text-indigo-700">3.2</span>) + 12th (<span id="hr-academic-calc-twelfth" class="font-mono font-bold text-purple-700">2.9</span>) + CGPA (<span id="hr-academic-calc-cgpa" class="font-mono font-bold text-amber-700">10.2</span>) = <strong id="hr-academic-calc-total" class="text-indigo-800 font-extrabold text-sm ml-1">16.3 / 20.0 Total Academic Pts</strong></span>
+            </div>
+            <div class="text-slate-500 font-mono text-[10px] flex items-center gap-1.5">
+              <span>Audit ID:</span>
+              <span id="hr-academic-audit-id" class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-semibold border border-slate-200">ACAD-VERIFIED</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Education & Experience Info -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+            <div class="flex items-center justify-between">
+              <h4 class="font-bold text-slate-800">🎓 Education & Academics:</h4>
+              <button type="button" onclick="app.toggleHRAcademicDetails()" class="text-[11px] font-bold text-indigo-600 hover:text-indigo-800 hover:underline flex items-center gap-1 cursor-pointer">
+                <span>View Percentages</span>
+                <span>↓</span>
+              </button>
+            </div>
+            <p id="hr-modal-cand-education" class="text-slate-700 font-medium"></p>
+            <div id="hr-modal-cand-marks-breakdown" class="text-[11px] text-slate-600 font-mono bg-white p-2.5 rounded-lg border border-slate-200"></div>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5">
+            <h4 class="font-bold text-slate-800">💼 Experience & Internship:</h4>
+            <p id="hr-modal-cand-experience" class="text-slate-700"></p>
+          </div>
+        </div>
+
+        <!-- Verified Skills & Assessment Results -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="space-y-2">
+            <h4 class="text-xs font-bold text-slate-800">Verified Technical Skills:</h4>
+            <div id="hr-modal-cand-skills" class="flex flex-wrap gap-1.5"></div>
+          </div>
+          <div class="space-y-2">
+            <h4 class="text-xs font-bold text-slate-800">Completed Courses & Certifications:</h4>
+            <div id="hr-modal-cand-certs-list" class="p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-1 text-xs"></div>
+          </div>
+        </div>
+
+        <!-- Projects -->
+        <div class="space-y-2">
+          <h4 class="text-xs font-bold text-slate-800">Verified Practical Projects:</h4>
+          <div id="hr-modal-cand-projects-list" class="p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-1"></div>
+        </div>
+
+        <!-- Active Interview Information if Scheduled -->
+        <div id="hr-modal-cand-interview-section" class="hidden p-4 rounded-xl bg-blue-50 border border-blue-200 space-y-2 text-xs">
+          <div class="flex items-center justify-between text-blue-900 font-bold">
+            <span>📅 Scheduled Candidate Interview:</span>
+            <span id="hr-modal-interview-status" class="px-2 py-0.5 rounded bg-blue-600 text-white text-[10px] font-mono">REQUESTED</span>
+          </div>
+          <div id="hr-modal-interview-details" class="text-slate-700 space-y-1"></div>
+        </div>
+      </div>
+
+      <!-- Decision Action Area -->
+      <div id="hr-decision-action-section" class="pt-4 border-t border-slate-100 space-y-4">
+        <!-- Locked Decision Notice -->
+        <div id="hr-decision-locked-notice" class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-center text-xs text-slate-500">
+          🔒 Recruiter decisions are locked until the candidate completes the required skill assessment.
+        </div>
+
+        <!-- Unlocked Decision Controls -->
+        <div id="hr-decision-unlocked-controls" class="space-y-4 hidden">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <span class="text-xs font-bold text-slate-900">Recruiter Actions:</span>
+            <div class="flex flex-wrap items-center gap-2.5">
+              <button type="button" onclick="app.openInterviewRequestModal()" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-sm transition flex items-center gap-1.5">
+                <span>📅 Request Interview</span>
+              </button>
+              <button type="button" onclick="app.setHRDecision('Accepted')" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-sm transition">
+                ✓ ACCEPT
+              </button>
+              <button type="button" onclick="app.setHRDecision('Rejected')" class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs shadow-sm transition">
+                ✕ REJECT
+              </button>
+            </div>
+          </div>
+
+          <!-- Mandatory Decision Rationale Box -->
+          <div id="hr-decision-comment-section" class="space-y-2">
+            <div class="flex items-center justify-between">
+              <label class="block text-xs font-semibold text-slate-700" id="hr-decision-status-label">Decision Reason & Candidate Feedback (Mandatory):</label>
+              <span class="text-[11px] text-slate-500 font-mono">Transparent to candidate</span>
+            </div>
+            <textarea id="hr-decision-comment" rows="3" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-800 text-xs focus:outline-none focus:border-blue-500 focus:bg-white" placeholder="Provide a structured, job-related reason for this hiring decision..."></textarea>
+            <div class="flex justify-end pt-1">
+              <button type="button" id="hr-submit-decision-btn" onclick="app.submitHRDecision()" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs rounded-xl shadow-md transition">
+                Confirm & Save Decision
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HR REQUEST INTERVIEW MODAL (TASK 4) -->
+  <div id="hr-interview-request-modal" class="fixed inset-0 z-50 modal-backdrop hidden items-center justify-center p-4">
+    <div class="light-card max-w-lg w-full p-6 sm:p-7 rounded-3xl border border-slate-200 shadow-2xl space-y-5 bg-white text-slate-800">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div class="flex items-center gap-2.5">
+          <span class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-lg">📅</span>
+          <div>
+            <h3 class="font-bold text-base text-slate-900">Request Candidate Interview</h3>
+            <p class="text-xs text-slate-500">Invite candidate for formal evaluation round.</p>
+          </div>
+        </div>
+        <button onclick="app.closeModal('hr-interview-request-modal')" class="text-slate-400 hover:text-slate-700 font-bold text-xl p-1">✕</button>
+      </div>
+
+      <!-- Target Candidate & Role Info -->
+      <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-1">
+        <div class="flex justify-between">
+          <span class="text-slate-500">Candidate:</span>
+          <span id="interview-req-cand-name" class="font-bold text-slate-900"></span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-500">Role & Company:</span>
+          <span id="interview-req-job-title" class="font-medium text-blue-700"></span>
+        </div>
+      </div>
+
+      <!-- Interview Request Form -->
+      <form id="hr-interview-form" onsubmit="event.preventDefault(); app.submitInterviewRequest();" class="space-y-4 text-xs">
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1.5">Interview Type</label>
+          <select id="interview-req-type" required class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-blue-500">
+            <option value="Technical Interview">Technical Interview</option>
+            <option value="HR Interview">HR Interview</option>
+            <option value="Video Interview">Video Interview</option>
+          </select>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1.5">Date</label>
+            <input type="date" id="interview-req-date" required class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-blue-500">
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1.5">Time</label>
+            <input type="time" id="interview-req-time" required class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-800 focus:outline-none focus:border-blue-500">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1.5">Message / Instructions for Candidate</label>
+          <textarea id="interview-req-message" rows="3" required placeholder="Please prepare a 10-minute presentation of your project and join using the FairHire interview room..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-500"></textarea>
+        </div>
+
+        <div class="flex items-center justify-end gap-3 pt-2">
+          <button type="button" onclick="app.closeModal('hr-interview-request-modal')" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold transition">
+            Cancel
+          </button>
+          <button type="submit" class="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold shadow-md shadow-blue-600/20 transition flex items-center gap-1.5">
+            <span>Send Interview Request →</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- TRANSPARENCY MODAL -->
+  <div id="transparency-modal" class="fixed inset-0 z-50 modal-backdrop hidden items-center justify-center p-4">
+    <div class="glass-card max-w-xl w-full p-6 sm:p-8 rounded-3xl border border-purple-900/50 shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <h3 class="font-bold text-lg text-white">SkillMatch Transparency Charter</h3>
+        <button onclick="app.closeModal('transparency-modal')" class="text-slate-400 hover:text-white">✕</button>
+      </div>
+      <p class="text-xs text-slate-300 leading-relaxed">
+        SkillMatch evaluates candidates solely using job-related criteria. The platform explicitly forbids discrimination or scoring based on gender, caste, religion, personal relationships, or social background.
+      </p>
+      <div class="text-xs space-y-2 bg-slate-900/80 p-4 rounded-xl border border-slate-800 text-slate-300">
+        <p class="text-emerald-400 font-semibold">Our 4 Guarantees:</p>
+        <p>1. <strong>Explainable Scoring:</strong> Every point is deterministic and documented.</p>
+        <p>2. <strong>Objective Assessments:</strong> Hands-on challenges replace subjective resume claims.</p>
+        <p>3. <strong>Clear Skill Gaps:</strong> Candidates receive personalized learning roadmaps.</p>
+        <p>4. <strong>Accountable Decisions:</strong> Recruiters must provide structured feedback for every application.</p>
+      </div>
+      <button onclick="app.closeModal('transparency-modal')" class="w-full py-2.5 bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs rounded-xl">
+        I Understand
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- 4. FLOATING AI CAREER COACH -->
+  <!-- ========================================================= -->
+  <div class="fixed bottom-6 right-6 z-40">
+    <!-- Chatbot Window -->
+    <div id="coach-window" class="chatbot-container w-[350px] sm:w-[390px] h-[520px] rounded-3xl glass-panel border border-slate-700/70 flex flex-col mb-4 hidden overflow-hidden">
+      <!-- Chat Header -->
+      <div class="bg-gradient-to-r from-blue-600 to-indigo-700 p-4 flex items-center justify-between text-white">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center font-bold text-sm">
+            🤖
+          </div>
+          <div>
+            <h4 class="font-bold text-sm leading-tight">SkillMatch AI Coach</h4>
+            <p class="text-[10px] text-blue-200">Contextual Career & Score Guidance</p>
+          </div>
+        </div>
+        <button id="coach-close-btn" class="text-white/80 hover:text-white text-lg">✕</button>
+      </div>
+
+      <!-- Messages Stream -->
+      <div id="coach-messages" class="flex-1 p-4 overflow-y-auto space-y-3">
+        <!-- Initial Bot Greeting -->
+        <div class="flex justify-start">
+          <div class="bg-slate-800 text-slate-200 border border-slate-700 rounded-2xl rounded-tl-none px-4 py-3 max-w-[90%] text-xs shadow-md leading-relaxed">
+            👋 Hello! I'm your <strong>SkillMatch Career Coach</strong>.
+            I can explain your score, analyze locked job requirements, or recommend the best skills to learn next.
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Prompt Chips -->
+      <div class="px-3 py-2 bg-slate-900/90 border-t border-slate-800 flex flex-wrap gap-1.5 max-h-24 overflow-y-auto">
+        <button type="button" class="coach-chip text-[10px] px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700 hover:border-blue-500 hover:text-blue-300 transition">
+          Why is my score 42/50?
+        </button>
+        <button type="button" class="coach-chip text-[10px] px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700 hover:border-blue-500 hover:text-blue-300 transition">
+          Why is Google locked?
+        </button>
+        <button type="button" class="coach-chip text-[10px] px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700 hover:border-blue-500 hover:text-blue-300 transition">
+          How can I improve my score?
+        </button>
+        <button type="button" class="coach-chip text-[10px] px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700 hover:border-blue-500 hover:text-blue-300 transition">
+          Which skills should I learn?
+        </button>
+        <button type="button" class="coach-chip text-[10px] px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700 hover:border-blue-500 hover:text-blue-300 transition">
+          Why was I not recommended?
+        </button>
+        <button type="button" class="coach-chip text-[10px] px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700 hover:border-blue-500 hover:text-blue-300 transition">
+          Which jobs match me?
+        </button>
+      </div>
+
+      <!-- Chat Input Form -->
+      <form id="coach-form" class="p-3 bg-navy-950 border-t border-slate-800 flex items-center gap-2">
+        <input type="text" id="coach-input" placeholder="Ask AI Coach a question..." class="flex-1 px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs focus:outline-none focus:border-blue-500">
+        <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-semibold">
+          Send
+        </button>
+      </form>
+    </div>
+
+    <!-- Chatbot Floating Toggle Button -->
+    <button id="coach-toggle-btn" class="flex items-center gap-2.5 px-4 py-3 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-xs shadow-2xl shadow-blue-600/50 hover:scale-105 transition">
+      <span class="text-base">🤖</span>
+      <span>SkillMatch AI Coach</span>
+      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+    </button>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="fixed bottom-6 left-6 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- Scripts -->
+  <script src="js/state.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/scoring.js"></script>
+  <script src="js/coach.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

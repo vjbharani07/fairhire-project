@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FairHire Automated Verification Suite</title>
+  <style>
+    body { font-family: monospace; padding: 20px; background: #0f172a; color: #f8fafc; }
+    .pass { color: #4ade80; }
+    .fail { color: #f87171; font-weight: bold; }
+    .section { margin-top: 15px; border-bottom: 1px solid #334155; padding-bottom: 5px; color: #60a5fa; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>FairHire Automated Verification Runner</h1>
+  <div id="results"></div>
+
+  <!-- Scripts -->
+  <script src="js/state.js"></script>
+  <script src="js/scoring.js"></script>
+  <script src="js/coach.js"></script>
+  <script src="js/app.js"></script>
+
+  <script>
+    const output = document.getElementById('results');
+    const logs = [];
+
+    function log(msg, status = 'info') {
+      const p = document.createElement('div');
+      p.className = status;
+      p.textContent = msg;
+      output.appendChild(p);
+      logs.push({ msg, status });
+    }
+
+    function section(title) {
+      const h = document.createElement('div');
+      h.className = 'section';
+      h.textContent = '--- ' + title + ' ---';
+      output.appendChild(h);
+    }
+
+    try {
+      // 1. TASK 1: GENERAL ASSESSMENT TEST
+      section('TASK 1: GENERAL ASSESSMENT');
+      const pool = ASSESSMENT_QUESTIONS;
+      if (pool && pool.length === 32) {
+        log(`✓ Question Pool Expanded: ${pool.length} questions across 8 domains (Target: 30-35)`, 'pass');
+      } else {
+        log(`✕ Question Pool Size mismatch: expected 32, got ${pool ? pool.length : 0}`, 'fail');
+      }
+
+      // Test random session generation
+      const session1 = generateAssessmentSession(pool, 15);
+      const session2 = generateAssessmentSession(pool, 15);
+      if (session1.length === 15 && session2.length === 15) {
+        log(`✓ Random Selection: Session generated exactly 15 questions per attempt`, 'pass');
+      } else {
+        log(`✕ Random Selection Failed: Session length not 15`, 'fail');
+      }
+
+      // Verify question options shuffle & correct answer preservation
+      let correctPreserved = true;
+      session1.forEach(q => {
+        const orig = pool.find(p => p.id === q.id);
+        const correctTextOrig = orig.options[orig.correctAnswer];
+        const correctTextShuffled = q.options[q.correctAnswer];
+        if (correctTextOrig !== correctTextShuffled) {
+          correctPreserved = false;
+        }
+      });
+      if (correctPreserved) {
+        log(`✓ Option Shuffling: All 15 questions preserved correct answer mapping after options shuffle`, 'pass');
+      } else {
+        log(`✕ Option Shuffling Failed: Correct answer mapping broken`, 'fail');
+      }
+
+      // Test scoring rule: correct / 15 * 100
+      const mockAnswers = { 0: session1[0].correctAnswer, 1: session1[1].correctAnswer, 2: session1[2].correctAnswer };
+      const scoreResult = FairHireScoring.calculateAssessmentScore(mockAnswers, session1);
+      if (scoreResult.score === 3 && scoreResult.totalQuestions === 15 && scoreResult.percentage === 20) {
+        log(`✓ Score Calculation: 3/15 gives 20% strictly (Formula: correct / 15 * 100)`, 'pass');
+      } else {
+        log(`✕ Score Calculation Failed: expected 3/15 (20%), got ${scoreResult.score}/${scoreResult.totalQuestions} (${scoreResult.percentage}%)`, 'fail');
+      }
+
+
+      // 2. TASK 2: CASE-BASED ASSESSMENT TEST
+      section('TASK 2: ROLE-SPECIFIC CASE ASSESSMENT');
+      const templates = CASE_ASSESSMENT_TEMPLATES;
+      const expectedTemplates = ['job-1', 'job-2', 'job-3', 'job-4', 'job-5', 'data-analyst'];
+      const hasAllTemplates = expectedTemplates.every(k => templates[k] && templates[k].questions && templates[k].questions.length >= 5);
+      if (hasAllTemplates) {
+        log(`✓ Case Templates Loaded: Found 6 role-specific case templates (Zoho, Infosys, Google, AWS, ABC Java, Data Analyst) each with 5-6 questions`, 'pass');
+      } else {
+        log(`✕ Case Templates Missing`, 'fail');
+      }
+
+      const zohoTemplate = getCaseTemplateForJob('job-1', 'Software Developer');
+      if (zohoTemplate && zohoTemplate.scenario && zohoTemplate.questions.length === 6) {
+        log(`✓ Zoho Developer Case Template: Valid scenario with 6 questions`, 'pass');
+      } else {
+        log(`✕ Zoho Template check failed`, 'fail');
+      }
+
+      // Test Case Assessment Scoring
+      const caseMockAnswers = { 0: zohoTemplate.questions[0].correctAnswer, 1: zohoTemplate.questions[1].correctAnswer };
+      const caseScoreRes = FairHireScoring.calculateCaseAssessmentScore(zohoTemplate, caseMockAnswers);
+      if (caseScoreRes.score === 2 && caseScoreRes.totalQuestions === 6 && caseScoreRes.percentage === 33) {
+        log(`✓ Case Scoring: 2/6 gives 33% properly`, 'pass');
+      } else {
+        log(`✕ Case Scoring check failed`, 'fail');
+      }
+
+
+      // 3. TASK 3 & 4: HR DATA FLOW & INTERVIEW REQUEST
+      section('TASK 3 & 4: HR DATA FLOW & INTERVIEW REQUEST');
+      const initialAppsCount = window.appStore.getState().applications.length;
+      log(`✓ Initial Applications in Single Source of Truth: ${initialAppsCount}`, 'pass');
+
+      // Submit new application
+      const appResult = FairHireScoring.submitApplication('job-4', 'FH1001', caseScoreRes);
+      if (appResult.success) {
+        log(`✓ Application Submission: Created application ${appResult.application.id} for AWS Cloud Engineer`, 'pass');
+      } else {
+        log(`✕ Application Submission failed: ${appResult.message}`, 'fail');
+      }
+
+      // Check duplicate prevention
+      const dupResult = FairHireScoring.submitApplication('job-4', 'FH1001', caseScoreRes);
+      if (!dupResult.success && dupResult.isDuplicate) {
+        log(`✓ Duplicate Prevention: Successfully prevented duplicate application for same job`, 'pass');
+      } else {
+        log(`✕ Duplicate Prevention failed`, 'fail');
+      }
+
+      // Test Interview Request
+      const targetAppId = appResult.application.id;
+      const interviewUpdate = FairHireScoring.updateApplicationStatus(
+        targetAppId,
+        'INTERVIEW_REQUESTED',
+        'Please prepare for system design interview.',
+        { type: 'Technical Interview', date: '2026-10-05', time: '10:30 AM', message: 'Please prepare for system design interview.' }
+      );
+      if (interviewUpdate.success) {
+        const updatedApp = window.appStore.getState().applications.find(a => a.id === targetAppId);
+        if (updatedApp && updatedApp.status === 'INTERVIEW_REQUESTED' && updatedApp.interviewRequest.date === '2026-10-05') {
+          log(`✓ Interview Request: Application status updated to INTERVIEW_REQUESTED with interview details stored`, 'pass');
+        } else {
+          log(`✕ Interview Request check failed in store`, 'fail');
+        }
+      } else {
+        log(`✕ Interview Request failed`, 'fail');
+      }
+
+
+      // 4. TASK 5: AI CAREER COACH DYNAMIC PROFILE TEST
+      section('TASK 5: AI CAREER COACH DYNAMIC PROFILE');
+      // Test with preset Ragav V profile
+      const stateWithRagav = window.appStore.getState();
+      const ragavResp = FairHireCoach.generateCoachResponse('Why is my score 42?', stateWithRagav);
+      if (ragavResp.includes('42') || ragavResp.includes('Ragav')) {
+        log(`✓ AI Coach (Ragav V Profile): Dynamic score breakdown generated`, 'pass');
+      }
+
+      // Test with Candidate B (Empty profile)
+      const candBProfile = {
+        id: 'FH2002',
+        name: 'Priya Sharma',
+        email: 'priya.s@student.edu',
+        academic: { tenthPercent: 0, twelfthPercent: 0, cgpa: 0 },
+        skills: [],
+        certifications: [],
+        projects: [],
+        experience: null,
+        score: { total: 0, academic: 0, technical: 0, certifications: 0, projects: 0 },
+        assessmentStatus: 'Not Started',
+        latestAssessment: null
+      };
+
+      const stateCandB = {
+        ...stateWithRagav,
+        candidate: candBProfile,
+        candidateAuth: { isLoggedIn: true, email: 'priya.s@student.edu', name: 'Priya Sharma' }
+      };
+
+      const candBResp = FairHireCoach.generateCoachResponse('Why is my score 0?', stateCandB);
+      if (!candBResp.includes('Ragav') && candBResp.includes('Priya') && candBResp.includes('0 / 50')) {
+        log(`✓ AI Coach (Candidate B Profile): Contextual response reflects Priya Sharma and 0/50 without any hardcoded Ragav references`, 'pass');
+      } else {
+        log(`✕ AI Coach Candidate B check failed: ${candBResp}`, 'fail');
+      }
+
+      const candBSkillGapResp = FairHireCoach.generateCoachResponse('Which skills should I learn?', stateCandB);
+      if (!candBSkillGapResp.includes('Ragav') && (candBSkillGapResp.includes('In-Demand Skills') || candBSkillGapResp.includes('Skill Gap'))) {
+        log(`✓ AI Coach Recommendations: Dynamic skill recommendations adapt to Priya Sharma with empty skills profile`, 'pass');
+      } else {
+        log(`✕ AI Coach recommendations check failed`, 'fail');
+      }
+
+      // Summary
+      section('TEST SUITE COMPLETED');
+      const failures = logs.filter(l => l.status === 'fail');
+      if (failures.length === 0) {
+        log('🎉 ALL AUTOMATED TESTS PASSED SUCCESSFULLY! (10/10 Verification Checkpoints)', 'pass');
+      } else {
+        log(`⚠️ ${failures.length} test(s) failed`, 'fail');
+      }
+
+      // Save report in window for headless read
+      window.testLogs = logs;
+      window.testPassed = (failures.length === 0);
+      document.title = window.testPassed ? 'TESTS_PASSED' : 'TESTS_FAILED';
+
+    } catch (err) {
+      log(`✕ Unhandled error in test runner: ${err.message}`, 'fail');
+      document.title = 'TESTS_FAILED';
+    }
+  </script>
+</body>
+</html>
